@@ -1,0 +1,9 @@
+select{
+    width: 15%;
+    height: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    margin: 7vh 0 0 10%;
+    border: 2px solid blueviolet;
+    border-radius: 3px;
+}

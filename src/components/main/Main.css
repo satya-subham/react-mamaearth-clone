@@ -1,0 +1,113 @@
+.banner img {
+  width: 100%;
+  margin-top: 129px;
+}
+
+.main-container {
+  width: 100%;
+  height: auto;
+  margin: 50px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.item-container {
+  height: 500px;
+  width: 300px;
+  border: 1px solid rgb(182, 194, 182);
+  text-align: center;
+  border-radius: 10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: bold;
+  font-family: sans-serif;
+  transition-duration: 0.5s;
+}
+.item-container:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 6px 4px rgba(167, 149, 149, 0.75);
+}
+.item-container img {
+  width: 200px;
+  height: 200px;
+}
+.best-seller {
+  margin-right: 150px;
+  margin-top: -12px;
+  width: 150px;
+  height: 40px;
+  background-color: red;
+  color: white;
+  border-radius: 10px 0px 10px 0px;
+}
+.para {
+  color: green;
+}
+.fa-star {
+  color: rgb(109, 47, 168);
+}
+.add-to-cart-btn {
+  width: 300px;
+  height: 50px;
+  background-color: rgb(138, 48, 222);
+  border-radius: 0px 0px 10px 10px;
+  border: none;
+  color: white;
+  font-size: larger;
+  margin-bottom: -13px;
+  transition-duration: 1s;
+}
+.add-to-cart-btn:hover {
+  background-color: white;
+  color: blueviolet;
+  border: 3px solid blueviolet;
+  cursor: pointer;
+}
+
+.video-section-text {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.video-container iframe {
+  border-radius: 10px;
+}
+.text {
+  width: 500px;
+  height: 300px;
+  color: blueviolet;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  text-align: left;
+  padding: 10px;
+  font-size: large;
+}
+.text div button {
+  width: auto;
+  height: 40px;
+  padding: 5px;
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: .5s;
+  font-size: small;
+}
+.text div button:hover {
+  cursor: pointer;
+  background-color: green;
+  color: white;
+}
+.loader-div{
+  width: 400px;
+  height: 400px;
+  margin: 100px 45%;
+}

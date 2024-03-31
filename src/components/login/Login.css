@@ -1,0 +1,39 @@
+.mini-log-in-pop-up {
+    width: 13%;
+    height: 36vh;
+    background-color: rgb(244, 242, 238);
+    cursor: pointer;
+    border-top: 2px solid blueviolet;
+    position: fixed;
+    top: 55px;
+    right: 10px;
+    z-index: 3;
+}
+
+.navlink-div{
+    height: 7vh;
+    padding-top: 12px;
+    border-bottom: 1px solid rgb(179, 149, 207);
+    transition: .3s;
+}
+.navlink-div:hover{
+    background-color: rgb(52, 186, 191);
+}
+.navlink-div a{
+    text-decoration: none;
+    margin: 10px 10%;
+    transition: .3s;
+}
+.navlink-div a:hover{
+    color: white;
+}
+.login-button{
+    background-color: blueviolet;
+    width: 80%;
+    height: 5vh;
+    margin: 10px 10%;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: medium;
+}
