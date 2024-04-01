@@ -32,7 +32,13 @@ const logInHandler = WrapperHandler(async (req, res, next) => {
   const token = setUser(user);
   console.log(token);
 
-  res.cookie("uid", token, { httpOnly: true, secure: true });
+  // res.cookie("uid", token, { httpOnly: true, secure: true });
+  res.cookie("uid", token, {
+    maxAge:300000, 
+    domain: 'react-mamaearth-clone.vercel.app', 
+    secure: true, 
+    sameSite: 'none', 
+  });
   res.status(200).send({
     message: "User logged in successfully",
     token: token,
@@ -43,6 +49,9 @@ const logInHandler = WrapperHandler(async (req, res, next) => {
 const getLoggedInUser = WrapperHandler(async (req, res, next) => {
   const { token } = req.body;
   const user = getUser(token);
+  if(!user){
+    throw new ApiErrorHandler("user not found", 400);
+  }
   console.log(user);
   res.status(200).json(user);
 });
@@ -57,6 +66,9 @@ const cartHandler = WrapperHandler(async (req, res) => {
     }
   );
   console.log(user);
+  if(!user){
+    throw new ApiErrorHandler("user not found", 400);
+  }
   res.status(200).json(user);
 });
 
@@ -64,14 +76,35 @@ const getUserCartData = WrapperHandler(async (req, res) => {
   const { email } = req.params;
   console.log(email);
   const user = await UserModel.findOne({ email });
+  if(!user){
+    throw new ApiErrorHandler("user not found", 400);
+  }
   console.log(user);
   res.status(200).json(user);
 });
+
+const deleteUserCartData = WrapperHandler(async (req, res) => {
+  const { email, id } = req.body;
+  console.log(email, id);
+  let user = await UserModel.updateOne(
+    { email},
+    { $pull: { cart: { _id: id } } },
+    { multi: true }
+  )
+  // user.cart.filter(item => !item.includes(id))
+  // user = await user.save();
+  console.log(user);
+  if(!user){
+    throw new ApiErrorHandler("user not found", 400);
+  }
+  res.status(200).json(user);
+})
 
 module.exports = {
   signUpHandler,
   logInHandler,
   getLoggedInUser,
   cartHandler,
-  getUserCartData
+  getUserCartData,
+  deleteUserCartData
 };

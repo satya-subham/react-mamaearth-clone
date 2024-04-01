@@ -32,6 +32,27 @@ export default function Cart() {
     getUser()
   },[]);
 
+  
+  const handleRemoveCart = async (id)=>{
+    const body = {
+      email: storageData[0].data.email,
+      id: id
+    }
+
+    try {
+      const user = await fetch(`http://localhost:8000/api/v1/users/cart/${body.email}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+     
+  }
+
   return (
     <>
       <div className="cart-container">
@@ -44,14 +65,14 @@ export default function Cart() {
           <div className="cart_content3 ">
             {
               cartArr.map((item, index) => (
-                <>
+                
                 <div className="cart_data" id="cont${item.id}" key={index}>
                   <div><img src={item.images[0]} alt="mamaearth" className="cart_image_name"/></div>
                   <div class="cart-img-text"><p className="image_name" >${item.name}</p>
                   <p className="price_name" > Rs.${item.price}</p></div>
-                   <div><button className="deletebutton" onClick={()=>handleRemoveCart(item.id)}>Drop</button></div>
+                   <div><button className="deletebutton" onClick={()=>handleRemoveCart(item._id)}>Drop</button></div>
                    </div>
-                </>
+                
               ))
             }
           </div>

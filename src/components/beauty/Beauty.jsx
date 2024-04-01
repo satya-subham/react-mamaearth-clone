@@ -14,7 +14,6 @@ export default function Beauty({interval=3000, search}) {
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState("");
 
   const { isCart, setIsCart, isRegister } = useContext(MainContext)
 
@@ -58,29 +57,54 @@ export default function Beauty({interval=3000, search}) {
     });
   },[])
 
-  useEffect(() => {
-    let filteredProducts = products.filter((product) => {
-      if(product.name){
-        return product.name.toLowerCase().includes(search.toLowerCase());
-      }
-    })
-    // setProducts(filteredProducts)
-    setFilteredProduct(filteredProducts)
-  },[search])
+  // useEffect(() => {
+  //   let filteredProducts = products.filter((product) => {
+  //     if(product.name){
+  //       return product.name.toLowerCase().includes(search.toLowerCase());
+  //     }
+  //   })
+  //   // setProducts(filteredProducts)
+  //   setFilteredProduct(filteredProducts)
+  // },[search])
 
   const handleSelect = (e) => {
-    setSelected(e.target.value);
-    if(e.target.value === 'low-to-high'){
-      filteredProduct.sort((a, b)=>{
-       return a.price - b.price
-      })
-    }else if(e.target.value === 'high-to-low'){
-      filteredProduct.sort((a, b)=>{
-        return b.price - a.price
-       })
-    }
+
+    let filteredProducts = products.filter((product) => {
+      if(product.name){
+        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+      }
+    })
+    setFilteredProduct(filteredProducts)
+
   }
-  // console.log(selected);
+
+
+  let storageData = [];
+  if (localStorage.getItem("user")) {
+    storageData = JSON.parse(localStorage.getItem("user"));
+  }
+  const handleAddToCart = async (product)=>{
+    const body = {
+      email: storageData[0].data.email,
+      product: product
+    }
+
+    try {
+      const user = await fetch("http://localhost:8000/api/v1/users/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+     
+  }
+
+
+
   return (
     <>
     {
@@ -93,8 +117,8 @@ export default function Beauty({interval=3000, search}) {
     <div className="select">
       <select name="select" id="select" onChange={handleSelect}>
         <option value="">Select</option>
-        <option value="low-to-high">Low to high</option>
-        <option value="high-to-low">High to low</option>
+        <option value="face">Face</option>
+        <option value="hair">Hair</option>
       </select>
     </div>
     {
@@ -116,7 +140,7 @@ export default function Beauty({interval=3000, search}) {
           <p className='para' style={{fontSize: "small"}}>{product.title}</p>
           <p className='para'><FontAwesomeIcon icon={faStar} className='fa-star'/>{product.rating} <span> | {product.reviews} reviews</span></p>
           <p className='item-price'>Rs: {product.price}</p>
-          <button id='cart' className='add-to-cart-btn'>Add to cart</button>
+          <button id='cart' className='add-to-cart-btn' onClick={()=>handleAddToCart(product)}>Add to cart</button>
         </div>
         )
       }

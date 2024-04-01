@@ -81,6 +81,34 @@ export default function AllProducts({interval=3000, search}) {
     }
   }
   // console.log(selected);
+
+
+  let storageData = [];
+  if (localStorage.getItem("user")) {
+    storageData = JSON.parse(localStorage.getItem("user"));
+  }
+  const handleAddToCart = async (product)=>{
+    const body = {
+      email: storageData[0].data.email,
+      product: product
+    }
+
+    try {
+      const user = await fetch("http://localhost:8000/api/v1/users/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+     
+  }
+
+
+
   return (
     <>
     {
@@ -115,7 +143,7 @@ export default function AllProducts({interval=3000, search}) {
           <p className='para' style={{fontSize: "small"}}>{product.title}</p>
           <p className='para'><FontAwesomeIcon icon={faStar} className='fa-star'/>{product.rating} <span> | {product.reviews} reviews</span></p>
           <p className='item-price'>Rs: {product.price}</p>
-          <button id='cart' className='add-to-cart-btn'>Add to cart</button>
+          <button id='cart' className='add-to-cart-btn' onClick={()=>handleAddToCart(product)}>Add to cart</button>
         </div>
         )
       }
