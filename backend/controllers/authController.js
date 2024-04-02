@@ -5,7 +5,7 @@ const ApiErrorHandler = require("../utils/ApiErrorHandler");
 const { setUser, getUser } = require("../utils/auth");
 
 const signUpHandler = WrapperHandler(async (req, res, next) => {
-  console.log(req.body);
+  
   const { email } = req.body;
   const isAlreadyRegistered = await UserModel.findOne({ email });
   if (isAlreadyRegistered) {
@@ -19,7 +19,7 @@ const signUpHandler = WrapperHandler(async (req, res, next) => {
 });
 
 const logInHandler = WrapperHandler(async (req, res, next) => {
-  console.log(req.body);
+  
   const { password, email } = req.body;
   const user = await UserModel.findOne({ email });
   const userPasswordIsCorrect = await bcrypt.compare(password, user.password);
@@ -30,12 +30,11 @@ const logInHandler = WrapperHandler(async (req, res, next) => {
   }
 
   const token = setUser(user);
-  console.log(token);
 
   // res.cookie("uid", token, { httpOnly: true, secure: true });
   res.cookie("uid", token, {
     maxAge:300000, 
-    domain: '.vercel.app', 
+    domain: 'vercel.app', 
     secure: true, 
     sameSite: 'none', 
   });
@@ -52,20 +51,20 @@ const getLoggedInUser = WrapperHandler(async (req, res, next) => {
   if(!user){
     throw new ApiErrorHandler("user not found", 400);
   }
-  console.log(user);
+  
   res.status(200).json(user);
 });
 
 const cartHandler = WrapperHandler(async (req, res) => {
   const { email, product } = req.body;
-  console.log(email, product);
+  
   const user = await UserModel.findOneAndUpdate(
     { email },
     {
       $push: { cart: product },
     }
   );
-  console.log(user);
+  
   if(!user){
     throw new ApiErrorHandler("user not found", 400);
   }
@@ -74,7 +73,7 @@ const cartHandler = WrapperHandler(async (req, res) => {
 
 const getUserCartData = WrapperHandler(async (req, res) => {
   const { email } = req.params;
-  console.log(email);
+  
   const user = await UserModel.findOne({ email });
   if(!user){
     throw new ApiErrorHandler("user not found", 400);
@@ -85,15 +84,13 @@ const getUserCartData = WrapperHandler(async (req, res) => {
 
 const deleteUserCartData = WrapperHandler(async (req, res) => {
   const { email, id } = req.body;
-  console.log(email, id);
+  
   let user = await UserModel.updateOne(
     { email},
     { $pull: { cart: { _id: id } } },
     { multi: true }
   )
-  // user.cart.filter(item => !item.includes(id))
-  // user = await user.save();
-  console.log(user);
+  
   if(!user){
     throw new ApiErrorHandler("user not found", 400);
   }
