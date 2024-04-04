@@ -23,10 +23,9 @@ export default function Cart() {
       try {
         const user = await fetch(`http://localhost:8000/api/v1/users/cart/${email}`);
         const data = await user.json();
-        console.log(data);
         setCartArr(data.cart)
       } catch (error) {
-        console.log(error.message);
+        alert(error.message);
       }
     }
     getUser()

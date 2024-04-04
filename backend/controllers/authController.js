@@ -31,13 +31,13 @@ const logInHandler = WrapperHandler(async (req, res, next) => {
 
   const token = setUser(user);
 
-  // res.cookie("uid", token, { httpOnly: true, secure: true });
-  res.cookie("uid", token, {
-    maxAge:300000, 
-    domain: 'vercel.app', 
-    secure: true, 
-    sameSite: 'none', 
-  });
+  res.cookie("uid", token, { httpOnly: true, secure: true });
+  // res.cookie("uid", token, {
+  //   maxAge:300000, 
+  //   domain: 'vercel.app', 
+  //   secure: true, 
+  //   sameSite: 'none', 
+  // });
   res.status(200).send({
     message: "User logged in successfully",
     token: token,

@@ -47,12 +47,11 @@ export default function Beauty({interval=3000, search}) {
   useEffect(() => {
     axios.get("http://localhost:8000/api/v1/allproducts")
     .then((response) => {
-      console.log(response);
       setProducts([...response.data["products"]]);
       setFilteredProduct([...response.data["products"]]);
       setLoading(false)
     }).catch((error) => {
-      console.log(error);
+      alert(error);
       setLoading(true)
     });
   },[])
