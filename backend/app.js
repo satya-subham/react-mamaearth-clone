@@ -4,7 +4,8 @@ const { allProductsRouter } = require("./routes/allProductsRouter");
 const { homeRouter } = require("./routes/homeRouter");
 const ErrorHandler = require("./utils/ErrorHandler");
 const authRoute = require("./routes/authRoute");
-const { checkAuth } = require("./middleware/Auth");
+const { checkAuth } = require("./middleware/auth");
+const cookieParser = require('cookie-parser')
 
 const getuserRoute = require("./routes/getUser");
 
@@ -12,7 +13,8 @@ const getuserRoute = require("./routes/getUser");
 const app = express();
 
 app.use(express.json());
-app.use(CORS());
+app.use(CORS({ origin: 'http://localhost:5173' , credentials: true}));
+app.use(cookieParser());
 
 app.use("/api/v1/home", homeRouter);
 app.use("/api/v1/allproducts", allProductsRouter);

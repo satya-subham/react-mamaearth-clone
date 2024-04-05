@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { MainContext } from "../../context/Context";
+import axios from "axios";
 
 import "./RegisterForm.css";
 
@@ -92,15 +93,10 @@ export default function () {
   const handleLogIn = async (event) =>{
     event.preventDefault();
     try {
-      const user = await fetch("http://localhost:8000/api/v1/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(logInDetails)
-      });
+      const user = await axios.post("http://localhost:8000/api/v1/users/login", logInDetails, { withCredentials: true });
 
-      const data = await user.json();
+      const data = user.data
+
       let storageData = [];
       if(localStorage.getItem("user")){
         storageData = JSON.parse(localStorage.getItem("user"))
@@ -109,7 +105,7 @@ export default function () {
         localStorage.setItem("user", JSON.stringify(storageData))
       }
       alert(data.message)
-      console.log(data);
+      console.log(user.data);
 
       setLogInDetails({
         email: "",
