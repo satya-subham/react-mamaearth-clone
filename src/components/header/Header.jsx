@@ -6,13 +6,14 @@ import { NavLink } from "react-router-dom";
 import { MainContext } from "../../context/Context";
 import HoverMiniLogIn from "../login/HoverMiniLogIn";
 
-export default function Header({ search, setSearch }) {
-  const { isCart, setIsCart, hoverMiniLogInPopUp, setHoverMiniLogInPopUp } =
+export default function Header() {
+  const { isCart, setIsCart, hoverMiniLogInPopUp, setHoverMiniLogInPopUp, search, setSearch } =
     useContext(MainContext);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
+  
 
   const handleCartModal = () => {
     setIsCart((prev) => !prev);

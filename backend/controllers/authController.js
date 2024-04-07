@@ -55,6 +55,12 @@ const getLoggedInUser = WrapperHandler(async (req, res, next) => {
   res.status(200).json(user);
 });
 
+const getLoginUser = WrapperHandler(async (req, res, next)=>{
+  const { email } = req.params;
+  const user = await UserModel.findOne({ email: email });
+  res.status(200).json(user);
+})
+
 const cartHandler = WrapperHandler(async (req, res) => {
   const { email, product } = req.body;
   
@@ -103,5 +109,6 @@ module.exports = {
   getLoggedInUser,
   cartHandler,
   getUserCartData,
-  deleteUserCartData
+  deleteUserCartData,
+  getLoginUser
 };

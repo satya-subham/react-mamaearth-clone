@@ -9,14 +9,14 @@ import Cart from '../cart/Cart';
 import "./AllProducts.css"
 import { Link } from 'react-router-dom';
 
-export default function AllProducts({interval=3000, search}) {
+export default function AllProducts({interval=3000}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState("");
 
-  const { isCart, setIsCart } = useContext(MainContext)
+  const { isCart, setIsCart, search, setSearch } = useContext(MainContext);
 
 
   const images = [

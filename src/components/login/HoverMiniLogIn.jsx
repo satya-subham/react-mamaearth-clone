@@ -49,7 +49,7 @@ export default function HoverMiniLogIn() {
       onMouseOut={onMouseOut}
     >
       <div className="navlink-div">
-        <NavLink>
+        <NavLink to={"/profile"}>
           <FontAwesomeIcon icon={faUser} />
           Your Profile
         </NavLink>

@@ -6,13 +6,13 @@ import RingLoader from "react-spinners/RingLoader";
 import { MainContext } from '../../context/Context';
 import Cart from '../cart/Cart';
 
-export default function GiftsPack({interval=3000, search}) {
+export default function GiftsPack({interval=3000}) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [products, setProducts] = useState([]);
     const [filteredProduct, setFilteredProduct] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const { isCart, setIsCart } = useContext(MainContext)
+    const { isCart, setIsCart, search, setSearch } = useContext(MainContext)
 
   const images = [
     "https://images.ctfassets.net/66mrrren2unf/5p5pVTewrOIcFmKeO0vbEP/e5231799d3125147c283a13ca28caec7/3.jpg?q=40",
@@ -39,13 +39,14 @@ export default function GiftsPack({interval=3000, search}) {
   }, [currentImageIndex, interval]);
 
   useEffect(() => {
-    axios.get("https://mmrth-nd-api.honasa-production.net/v1/categories/2/products")
+    axios.get("http://localhost:8000/api/v1/home")
     .then((response) => {
-      setProducts([...response.data["bestsellers"]]);
-      setFilteredProduct([...response.data["bestsellers"]]);
+      console.log(response);
+      setProducts([...response.data["products"]]);
+      setFilteredProduct([...response.data["products"]]);
       setLoading(false)
     }).catch((error) => {
-      console.log(error.message);
+      console.log(error);
       setLoading(true)
     });
   },[])

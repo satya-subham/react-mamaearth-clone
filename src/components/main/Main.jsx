@@ -13,14 +13,14 @@ import "./Main.css"
 import { Link } from 'react-router-dom';
 
 
-export default function Main({ interval=3000, search, setSearch}) {
+export default function Main({ interval=3000}) {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { isCart, setIsCart, hoverMiniLogInPopUp, setHoverMiniLogInPopUp, isRegister, setIsRegister } = useContext(MainContext)
+  const { isCart, setIsCart, hoverMiniLogInPopUp, setHoverMiniLogInPopUp, isRegister, setIsRegister, search, setSearch } = useContext(MainContext)
 
   const images = [
     "https://images.ctfassets.net/66mrrren2unf/5p5pVTewrOIcFmKeO0vbEP/e5231799d3125147c283a13ca28caec7/3.jpg?q=40",
@@ -57,16 +57,15 @@ export default function Main({ interval=3000, search, setSearch}) {
   },[])
 
 
-
-  // useEffect(() => {
-  //   let filteredProducts = products.filter((product) => {
-  //     if(product.name){
-  //       return product.name.toLowerCase().includes(search.toLowerCase());
-  //     }
-  //   })
-  //   // setProducts(filteredProducts)
-  //   setFilteredProduct(filteredProducts)
-  // }, [search]);
+  useEffect(() => {
+    let filteredProducts = products.filter((product) => {
+      if(product.name){
+        return product.name.toLowerCase().includes(search.toLowerCase());
+      }
+    })
+    // setProducts(filteredProducts)
+    setFilteredProduct(filteredProducts)
+  }, [search]);
 
 
   // let cartArr = [];

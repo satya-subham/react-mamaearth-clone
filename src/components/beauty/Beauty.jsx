@@ -9,13 +9,13 @@ import Cart from '../cart/Cart';
 import "./Beauty.css"
 import { Link } from 'react-router-dom';
 
-export default function Beauty({interval=3000, search}) {
+export default function Beauty({interval=3000}) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { isCart, setIsCart, isRegister } = useContext(MainContext)
+  const { isCart, setIsCart, isRegister, search, setSearch } = useContext(MainContext)
 
 
   const images = [
@@ -56,15 +56,15 @@ export default function Beauty({interval=3000, search}) {
     });
   },[])
 
-  // useEffect(() => {
-  //   let filteredProducts = products.filter((product) => {
-  //     if(product.name){
-  //       return product.name.toLowerCase().includes(search.toLowerCase());
-  //     }
-  //   })
-  //   // setProducts(filteredProducts)
-  //   setFilteredProduct(filteredProducts)
-  // },[search])
+  useEffect(() => {
+    let filteredProducts = products.filter((product) => {
+      if(product.name){
+        return product.name.toLowerCase().includes(search.toLowerCase());
+      }
+    })
+    // setProducts(filteredProducts)
+    setFilteredProduct(filteredProducts)
+  },[search])
 
   const handleSelect = (e) => {
 

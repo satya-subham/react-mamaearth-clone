@@ -9,21 +9,22 @@ import Error from './components/errorpage/Error';
 import DetailsPage from './components/detailspage/DetailsPage';
 import Beauty from './components/beauty/Beauty';
 import { loader as homeLoader } from './components/detailspage/DetailsPage';
+import ProfilePage from './components/profile/ProfilePage';
 
 function App() {
-  const [search, setSearch] = useState("")
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Root search={search} setSearch={setSearch}/>,
+      element: <Root />,
       errorElement: <Error />,
       children: [
-        {path: "", element: <Home search={search} setSearch={setSearch}/>},
-        {path: "giftpacks", element: <GiftsPack search={search} setSearch={setSearch}/>},
-        { path: "allproducts", element: <AllProducts search={search}/>},
+        {path: "", element: <Home />},
+        {path: "giftpacks", element: <GiftsPack />},
+        { path: "allproducts", element: <AllProducts />},
         { path: "beauty", element: <Beauty/>},
-        { path: "/product/:id", element: <DetailsPage />, loader: homeLoader}
+        { path: "profile", element: <ProfilePage />},
+        { path: "/product/:id", element: <DetailsPage />, loader: homeLoader},
       ]
     }
   ])
