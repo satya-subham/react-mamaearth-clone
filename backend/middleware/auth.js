@@ -1,25 +1,21 @@
+const { UserModel } = require("../models/signUpModel");
+const ApiErrorHandler = require("../utils/ApiErrorHandler");
 const { getUser } = require("../utils/auth");
 
 async function restrictToLoggedinUserOnly(req, res, next) {
-  const userUid = req.cookies?.uid;
+  
+  // const {token} = req.headers;
+  const {token} = req?.cookies;
+  if(!token) {
+    return new ApiErrorHandler('authentication token is required', 403)
+  }
 
-  const user = getUser(userUid);
-
-  req.user = user;
-  next();
-}
-
-async function checkAuth(req, res, next) {
-    console.log(req.cookie);
-//   const userUid = req.cookies?.uid;
-
-//   const user = getUser(userUid);
-
-//   req.user = user;
+  const user = getUser(token);
+  const currentUser = await UserModel.findOne({ email: user.email });
+  req.user = currentUser;
   next();
 }
 
 module.exports = {
   restrictToLoggedinUserOnly,
-  checkAuth,
 };

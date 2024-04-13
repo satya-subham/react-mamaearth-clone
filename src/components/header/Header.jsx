@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -7,13 +8,20 @@ import { MainContext } from "../../context/Context";
 import HoverMiniLogIn from "../login/HoverMiniLogIn";
 
 export default function Header() {
-  const { isCart, setIsCart, hoverMiniLogInPopUp, setHoverMiniLogInPopUp, search, setSearch } =
-    useContext(MainContext);
+  const {
+    isCart,
+    setIsCart,
+    hoverMiniLogInPopUp,
+    setHoverMiniLogInPopUp,
+    search,
+    setSearch,
+    user,
+    setUser,
+  } = useContext(MainContext);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-  
 
   const handleCartModal = () => {
     setIsCart((prev) => !prev);
@@ -82,31 +90,19 @@ export default function Header() {
     },
   ];
 
-  let storageData = [];
-  if (localStorage.getItem("user")) {
-    storageData = JSON.parse(localStorage.getItem("user"));
-  }
-  
-  useEffect(()=>{
-    async function getUser(){
-      const token = {
-        token: storageData[0]?.token
-      };
-      try {
-        const user = await fetch("http://localhost:8000", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(token)
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/v1/users/loggedInUser", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      console.log(await user?.json());
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    getUser()
-  },[]);
+  }, []);
 
   return (
     <>
@@ -137,13 +133,17 @@ export default function Header() {
                 <FontAwesomeIcon icon={faCartArrowDown} />
                 Cart
               </button>
-              { storageData.length > 0 ? <button onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
-                <FontAwesomeIcon icon={faUser} />
-                {storageData[0].data.firstName}
-              </button> : <button onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
-                <FontAwesomeIcon icon={faUser} />
-                Login
-              </button>}
+              {user ? (
+                <button onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
+                  <FontAwesomeIcon icon={faUser} />
+                  {user.firstName}
+                </button>
+              ) : (
+                <button onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
+                  <FontAwesomeIcon icon={faUser} />
+                  Login
+                </button>
+              )}
             </div>
           </div>
           <nav>

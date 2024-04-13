@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { MainContext } from "../../context/Context";
+import axios from "axios";
 
 export default function HoverMiniLogIn() {
   const {
@@ -16,6 +17,8 @@ export default function HoverMiniLogIn() {
     setHoverMiniLogInPopUp,
     isRegister,
     setIsRegister,
+    user,
+    setUser,
   } = useContext(MainContext);
 
   const onMouseEnter = () => {
@@ -30,17 +33,19 @@ export default function HoverMiniLogIn() {
     document.body.style.overflow = "hidden";
   };
 
-  let storageData = [];
-  if (localStorage.getItem("user")) {
-    storageData = JSON.parse(localStorage.getItem("user"));
-  }
-
-  const handleLogOut = () =>{
-    localStorage.clear();
-  }
-
-  
-  
+  const handleLogOut = () => {
+    axios
+      .get("http://localhost:8000/api/v1/users/loggedInUser/logout", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setUser(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div
@@ -72,13 +77,15 @@ export default function HoverMiniLogIn() {
           Your Order
         </NavLink>
       </div>
-      {
-        storageData.length > 0 ? <button className="login-button" onClick={handleLogOut}>
-        LogOut
-      </button> : <button className="login-button" onClick={handleRegisterModal}>
-        LogIn
-      </button>
-      }
+      {user ? (
+        <button className="login-button" onClick={handleLogOut}>
+          LogOut
+        </button>
+      ) : (
+        <button className="login-button" onClick={handleRegisterModal}>
+          LogIn
+        </button>
+      )}
     </div>
   );
 }

@@ -7,6 +7,7 @@ function Context({ children }) {
   const [isRegister, setIsRegister] = useState(false);
   const [hoverMiniLogInPopUp, setHoverMiniLogInPopUp] = useState(false);
   const [search, setSearch] = useState("");
+  const [user, setUser] = useState();
 
   return (
     <MainContext.Provider
@@ -19,6 +20,8 @@ function Context({ children }) {
         setIsRegister,
         search,
         setSearch,
+        user,
+        setUser,
       }}
     >
       {children}

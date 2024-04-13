@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import { MainContext } from '../../context/Context';
+import { MainContext } from "../../context/Context";
 import Cart from "../cart/Cart";
 import "./DetailsPage.css";
 
 export default function DetailsPage({ interval = 3000 }) {
-
-    const { isCart, setIsCart } = useContext(MainContext)
+  const { isCart, setIsCart, user } = useContext(MainContext);
 
   const loaderData = useLoaderData();
 
@@ -36,16 +35,32 @@ export default function DetailsPage({ interval = 3000 }) {
     };
   }, [currentImageIndex, interval]);
 
-
   const handleImage = (e) => {
-    setSrc(e.target.src)
-  }
+    setSrc(e.target.src);
+  };
+
+  const handleAddToCart = async (product) => {
+    const body = {
+      email: user.email,
+      product: product,
+    };
+
+    try {
+      const user = await fetch("http://localhost:8000/api/v1/users/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
-    {
-      isCart ? <Cart /> : undefined
-    }
+      {isCart ? <Cart /> : undefined}
       <div className="banner">
         <img
           src={images[currentImageIndex]}
@@ -57,17 +72,24 @@ export default function DetailsPage({ interval = 3000 }) {
           <div className="big-img-container">
             <img src={src} alt="" srcset="" />
           </div>
-          {loaderData.product.images.map((image, i) =>(
+          {loaderData.product.images.map((image, i) => (
             <div className="sml-img-container">
-            <img src={image} alt="" srcset="" onClick={handleImage}/>
+              <img src={image} alt="" srcset="" onClick={handleImage} />
             </div>
           ))}
         </div>
         <div className="product-details-container">
-            <p>{loaderData.product.name}</p>
-            <p>{loaderData.product.title}</p>
-            <span>Rating: {loaderData.product.rating}</span> | <span>Reviews: {loaderData.product.reviews}</span>
-            <p>Rs: {loaderData.product.price}</p>
+          <p>{loaderData.product.name}</p>
+          <p>{loaderData.product.title}</p>
+          <span>Rating: {loaderData.product.rating}</span> |{" "}
+          <span>Reviews: {loaderData.product.reviews}</span>
+          <p>Rs: {loaderData.product.price}</p>
+          <button
+            className="add-to-cart-btn"
+            onClick={() => handleAddToCart(loaderData.product)}
+          >
+            add to cart
+          </button>
         </div>
       </div>
     </>
@@ -76,7 +98,9 @@ export default function DetailsPage({ interval = 3000 }) {
 
 export async function loader({ request, params }) {
   const id = params.id;
-  const response = await fetch(`http://localhost:8000/api/v1/allproducts/${id}`);
+  const response = await fetch(
+    `http://localhost:8000/api/v1/allproducts/${id}`
+  );
   if (!response.ok) {
     throw json(
       {

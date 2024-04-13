@@ -1,4 +1,4 @@
-const fs = require("fs");
+
 const { AllProducts } = require("../models/allProductsModel");
 const WrapperHandler = require("../utils/WrapperHandler");
 const ApiErrorHandler = require("../utils/ApiErrorHandler");

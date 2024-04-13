@@ -5,7 +5,6 @@ const ApiErrorHandler = require("../utils/ApiErrorHandler");
 const { setUser, getUser } = require("../utils/auth");
 
 const signUpHandler = WrapperHandler(async (req, res, next) => {
-  
   const { email } = req.body;
   const isAlreadyRegistered = await UserModel.findOne({ email });
   if (isAlreadyRegistered) {
@@ -19,59 +18,58 @@ const signUpHandler = WrapperHandler(async (req, res, next) => {
 });
 
 const logInHandler = WrapperHandler(async (req, res, next) => {
-  
   const { password, email } = req.body;
+
   const user = await UserModel.findOne({ email });
   const userPasswordIsCorrect = await bcrypt.compare(password, user.password);
 
-  console.log(userPasswordIsCorrect);
   if (!userPasswordIsCorrect) {
     throw new ApiErrorHandler("Login failed", 500);
   }
 
   const token = setUser(user);
 
-  // res.cookie("uid", token, { httpOnly: true, secure: true });
-  res.cookie("uid", token, {
-    maxAge:300000,  
-    secure: true, 
-    sameSite: 'Strict',
-    httpOnly: true 
+  // res.cookie("token", token, { httpOnly: true, secure: true });
+  res.cookie("token", token, {
+    maxAge: 3600000,
+    secure: true,
+    sameSite: "Strict",
+    httpOnly: true,
+    // path: 'http://localhost:8000/api/v1/users'
   });
+
   res.status(200).send({
     message: "User logged in successfully",
-    token: token,
     data: user,
   });
 });
 
 const getLoggedInUser = WrapperHandler(async (req, res, next) => {
-  const { token } = req.body;
-  const user = getUser(token);
-  if(!user){
+  const user = req.user;
+  if (!user) {
     throw new ApiErrorHandler("user not found", 400);
   }
-  
+
   res.status(200).json(user);
 });
 
-const getLoginUser = WrapperHandler(async (req, res, next)=>{
+const getLoginUser = WrapperHandler(async (req, res, next) => {
   const { email } = req.params;
   const user = await UserModel.findOne({ email: email });
   res.status(200).json(user);
-})
+});
 
 const cartHandler = WrapperHandler(async (req, res) => {
   const { email, product } = req.body;
-  
+
   const user = await UserModel.findOneAndUpdate(
     { email },
     {
       $push: { cart: product },
     }
   );
-  
-  if(!user){
+
+  if (!user) {
     throw new ApiErrorHandler("user not found", 400);
   }
   res.status(200).json(user);
@@ -79,29 +77,34 @@ const cartHandler = WrapperHandler(async (req, res) => {
 
 const getUserCartData = WrapperHandler(async (req, res) => {
   const { email } = req.params;
-  
+
   const user = await UserModel.findOne({ email });
-  if(!user){
+  if (!user) {
     throw new ApiErrorHandler("user not found", 400);
   }
-  console.log(user);
+
   res.status(200).json(user);
 });
 
 const deleteUserCartData = WrapperHandler(async (req, res) => {
   const { email, id } = req.body;
-  
+
   let user = await UserModel.updateOne(
-    { email},
+    { email },
     { $pull: { cart: { _id: id } } },
     { multi: true }
-  )
-  
-  if(!user){
+  );
+
+  if (!user) {
     throw new ApiErrorHandler("user not found", 400);
   }
   res.status(200).json(user);
-})
+});
+
+const loggoutUser = WrapperHandler(async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json("user logged out");
+});
 
 module.exports = {
   signUpHandler,
@@ -110,5 +113,6 @@ module.exports = {
   cartHandler,
   getUserCartData,
   deleteUserCartData,
-  getLoginUser
+  getLoginUser,
+  loggoutUser,
 };
