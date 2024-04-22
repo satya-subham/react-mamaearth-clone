@@ -74,6 +74,10 @@ export default function Main({ interval = 3000 }) {
   }, [search]);
 
   const handleAddToCart = async (product) => {
+
+    if(!user){
+      return alert('please log in to add to cart')
+    }
     const body = {
       email: user.email,
       product: product,
