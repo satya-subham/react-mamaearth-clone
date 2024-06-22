@@ -51,7 +51,7 @@ export default function Main({ interval = 3000 }) {
   // https://mamarath-backend-1.onrender.com // http://localhost:8000/api/v1/home
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/home")
+      .get("https://mamarath-backend.vercel.app/api/v1/home")
       .then((response) => {
         setProducts([...response.data["products"]]);
         setFilteredProduct([...response.data["products"]]);
