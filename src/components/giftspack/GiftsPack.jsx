@@ -39,7 +39,7 @@ export default function GiftsPack({interval=3000}) {
   }, [currentImageIndex, interval]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/v1/home")
+    axios.get("https://mamarath-backend.vercel.app/api/v1/home")
     .then((response) => {
       console.log(response);
       setProducts([...response.data["products"]]);
@@ -73,7 +73,7 @@ export default function GiftsPack({interval=3000}) {
     };
 
     try {
-      const user = await fetch("http://localhost:8000/api/v1/users/cart", {
+      const user = await fetch("https://mamarath-backend.vercel.app/api/v1/users/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -48,7 +48,7 @@ export default function Main({ interval = 3000 }) {
     }
   }, [currentImageIndex]);
 
-  // https://mamarath-backend-1.onrender.com // http://localhost:8000/api/v1/home
+  
   useEffect(() => {
     axios
       .get("https://mamarath-backend.vercel.app/api/v1/home")
@@ -84,7 +84,7 @@ export default function Main({ interval = 3000 }) {
     };
 
     try {
-      const user = await fetch("http://localhost:8000/api/v1/users/cart", {
+      const user = await fetch("https://mamarath-backend.vercel.app/api/v1/users/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

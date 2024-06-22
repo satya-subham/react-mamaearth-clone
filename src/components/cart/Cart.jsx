@@ -17,7 +17,7 @@ export default function Cart() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/users/loggedInUser", {
+      .get("https://mamarath-backend.vercel.app/api/v1/users/loggedInUser", {
         withCredentials: true,
       })
       .then((response) => {
@@ -47,7 +47,7 @@ export default function Cart() {
 
     try {
       const user = await fetch(
-        `http://localhost:8000/api/v1/users/cart/${body.email}`,
+        `https://mamarath-backend.vercel.app/api/v1/users/cart/${body.email}`,
         {
           method: "DELETE",
           headers: {

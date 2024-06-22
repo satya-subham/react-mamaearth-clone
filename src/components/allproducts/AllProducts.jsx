@@ -45,7 +45,7 @@ export default function AllProducts({ interval = 3000 }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/allproducts")
+      .get("https://mamarath-backend.vercel.app/api/v1/allproducts")
       .then((response) => {
         setProducts([...response.data["products"]]);
         setFilteredProduct([...response.data["products"]]);
@@ -87,7 +87,7 @@ export default function AllProducts({ interval = 3000 }) {
     };
 
     try {
-      const user = await fetch("http://localhost:8000/api/v1/users/cart", {
+      const user = await fetch("https://mamarath-backend.vercel.app/api/v1/users/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

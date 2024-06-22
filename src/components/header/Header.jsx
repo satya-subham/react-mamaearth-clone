@@ -92,7 +92,7 @@ export default function Header() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/users/loggedInUser", {
+      .get("https://mamarath-backend.vercel.app/api/v1/users/loggedInUser", {
         withCredentials: true,
       })
       .then((response) => {

@@ -55,7 +55,7 @@ export default function () {
         return alert("confirmPassword must be matched with password");
       }
 
-      const user = await fetch("http://localhost:8000/api/v1/users/signup", {
+      const user = await fetch("https://mamarath-backend.vercel.app/api/v1/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export default function () {
     event.preventDefault();
     try {
       const user = await axios.post(
-        "http://localhost:8000/api/v1/users/login",
+        "https://mamarath-backend.vercel.app/api/v1/users/login",
         logInDetails,
         { withCredentials: true }
       );

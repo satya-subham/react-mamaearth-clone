@@ -35,7 +35,7 @@ export default function HoverMiniLogIn() {
 
   const handleLogOut = () => {
     axios
-      .get("http://localhost:8000/api/v1/users/loggedInUser/logout", {
+      .get("https://mamarath-backend.vercel.app/api/v1/users/loggedInUser/logout", {
         withCredentials: true,
       })
       .then((response) => {
