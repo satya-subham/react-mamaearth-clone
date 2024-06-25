@@ -12,6 +12,7 @@ import { loader as homeLoader } from './components/detailspage/DetailsPage';
 import ProfilePage from './components/profile/ProfilePage';
 import Hair from './components/hair/Hair';
 import Body from './components/body/Body';
+import Makeup from './components/makeup/Makeup';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         { path: "profile", element: <ProfilePage />},
         { path: "hair", element: <Hair />},
         { path: "body", element: <Body />},
+        { path: "makeup", element: <Makeup />},
         { path: "/product/:id", element: <DetailsPage />, loader: homeLoader},
       ]
     }
