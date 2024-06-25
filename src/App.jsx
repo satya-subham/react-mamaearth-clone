@@ -14,6 +14,7 @@ import Hair from './components/hair/Hair';
 import Body from './components/body/Body';
 import Makeup from './components/makeup/Makeup';
 import Face from './components/face/Face';
+import Baby from './components/baby/Baby';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         { path: "body", element: <Body />},
         { path: "makeup", element: <Makeup />},
         { path: "face", element: <Face />},
+        { path: "baby", element: <Baby />},
         { path: "/product/:id", element: <DetailsPage />, loader: homeLoader},
       ]
     }
