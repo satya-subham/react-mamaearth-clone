@@ -11,6 +11,7 @@ import Beauty from './components/beauty/Beauty';
 import { loader as homeLoader } from './components/detailspage/DetailsPage';
 import ProfilePage from './components/profile/ProfilePage';
 import Hair from './components/hair/Hair';
+import Body from './components/body/Body';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         { path: "beauty", element: <Beauty/>},
         { path: "profile", element: <ProfilePage />},
         { path: "hair", element: <Hair />},
+        { path: "body", element: <Body />},
         { path: "/product/:id", element: <DetailsPage />, loader: homeLoader},
       ]
     }
@@ -33,16 +35,7 @@ function App() {
 
   return (
     <>
-      {/* <Header search={search} setSearch={setSearch}/>
-      <Routes>
-        <Route path='/' element={<Main search={search} setSearch={setSearch}/>}/>
-        <Route path='/giftpacks' element={<GiftsPack search={search} setSearch={setSearch}/>}/>
-        <Route path='/allproducts' element={<AllProducts search={search}/>}/>
-      </Routes>
-      <Footer /> */}
-
       <RouterProvider router={router} />
-      
     </>
   )
 }
