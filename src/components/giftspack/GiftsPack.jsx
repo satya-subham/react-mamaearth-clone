@@ -5,6 +5,7 @@ import { faStar} from "@fortawesome/free-solid-svg-icons";
 import RingLoader from "react-spinners/RingLoader";
 import { MainContext } from '../../context/Context';
 import Cart from '../cart/Cart';
+import { Link } from "react-router-dom";
 
 export default function GiftsPack({interval=3000}) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -106,7 +107,10 @@ export default function GiftsPack({interval=3000}) {
         filteredProduct.map((product, index) =>
         <div className='item-container' key={index}>
           <div className="best-seller">Best Seller</div>
-          <img src={product.images[0]} alt="" id='home_img'/>
+          
+          <Link to={`/product/${product._id}`}>
+                <img src={product.images[0]} alt="" id="home_img" />
+              </Link>
           <p className='item-para'>{product.name}</p>
           <p className='para'><FontAwesomeIcon icon={faStar} className='fa-star'/>{(5*parseInt(product.avg_rating_percent))/100} <span> | {product.review_count} reviews</span></p>
           <p className='item-price'>{product.price}</p>
