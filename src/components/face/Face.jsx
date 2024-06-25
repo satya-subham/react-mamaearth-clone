@@ -45,8 +45,8 @@ export default function Face({ interval = 3000 }) {
       .get("https://mamarath-backend.vercel.app/api/v1/face")
       .then((response) => {
         console.log(response);
-        setProducts([...response.data["products"]]);
-        setFilteredProduct([...response.data["products"]]);
+        setProducts([...response.data["faceProducts"]]);
+        setFilteredProduct([...response.data["faceProducts"]]);
         setLoading(false);
       })
       .catch((error) => {
