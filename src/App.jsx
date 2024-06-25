@@ -10,6 +10,7 @@ import DetailsPage from './components/detailspage/DetailsPage';
 import Beauty from './components/beauty/Beauty';
 import { loader as homeLoader } from './components/detailspage/DetailsPage';
 import ProfilePage from './components/profile/ProfilePage';
+import Hair from './components/hair/Hair';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         { path: "allproducts", element: <AllProducts />},
         { path: "beauty", element: <Beauty/>},
         { path: "profile", element: <ProfilePage />},
+        { path: "hair", element: <Hair />},
         { path: "/product/:id", element: <DetailsPage />, loader: homeLoader},
       ]
     }
