@@ -118,7 +118,6 @@ export default function Hair({ interval = 3000 }) {
               <Link to={`/product/${product._id}`}>
                 <img src={product.images[0]} alt="" id="home_img" />
               </Link>
-              <img src={product.images[0]} alt="" id="home_img" />
               <p className="item-para">{product.name}</p>
               <p className="para">
                 <FontAwesomeIcon icon={faStar} className="fa-star" />
