@@ -13,6 +13,7 @@ import ProfilePage from './components/profile/ProfilePage';
 import Hair from './components/hair/Hair';
 import Body from './components/body/Body';
 import Makeup from './components/makeup/Makeup';
+import Face from './components/face/Face';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         { path: "hair", element: <Hair />},
         { path: "body", element: <Body />},
         { path: "makeup", element: <Makeup />},
+        { path: "face", element: <Face />},
         { path: "/product/:id", element: <DetailsPage />, loader: homeLoader},
       ]
     }
