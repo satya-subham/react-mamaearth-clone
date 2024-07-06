@@ -1,6 +1,5 @@
 const {HomeProducts} = require('../models/homeModel');
 const WrapperHandler  = require('../utils/WrapperHandler');
-WrapperHandler
 
 const homeController = WrapperHandler(async (req, res, next) => {
     

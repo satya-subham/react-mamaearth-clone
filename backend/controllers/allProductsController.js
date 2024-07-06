@@ -2,7 +2,6 @@
 const { AllProducts } = require("../models/allProductsModel");
 const WrapperHandler = require("../utils/WrapperHandler");
 const ApiErrorHandler = require("../utils/ApiErrorHandler");
-WrapperHandler
 
 const getAllProducts = WrapperHandler(async (req, res, next) => {
 
