@@ -1,89 +1,113 @@
 * {
-    margin: 0;;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.header{
-    width: 100%;
-    height: auto;
-    background-color: white;
-    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
-    position: fixed;
-    z-index: 3;
-    
+.header {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  position: fixed;
+  z-index: 3;
+  animation: background 2s forwards linear;
 }
-.logo-input-cart-login{
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0, 128, 0, 0.388);
-    
+.logo-input-cart-login {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 128, 0, 0.388);
 }
-.logo-input{
-    width: 60%;
-    display: flex;
-    align-items: center;
-    padding-left: 7%;
+.logo-input {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  padding-left: 7%;
 }
-.logo-input img{
-    width: 20%;
+.logo-input img {
+  width: 20%;
 }
-.logo-input img:hover{
-    cursor: pointer;
+.logo-input img:hover {
+  cursor: pointer;
 }
 .logo-input input {
-    width: 60%;
-    height: 30px;
-    border: 1px solid blueviolet;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    padding-left: 3%;
+  width: 60%;
+  height: 30px;
+  border: 1px solid blueviolet;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  padding-left: 3%;
 }
 .logo-input button {
-    width: 7%;
-    height: 30px;
-    background-color: blueviolet;
-    color: white;
-    border: none;
-    border-radius: 0 5px 5px 0;
+  width: 7%;
+  height: 30px;
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
 }
-.logo-input button:hover{
-    cursor: pointer;
+.logo-input button:hover {
+  cursor: pointer;
 }
 
-.cart-login{
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.cart-login {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .cart-login img {
-    width: 35%;
+  width: 35%;
 }
 .cart-login button {
-    background: none;
-    border: none;
-    color: blueviolet;
-    font-size: medium;
+  background: none;
+  border: none;
+  color: blueviolet;
+  font-size: medium;
 }
 .cart-login button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
-.nav{
-    width: 100%;
-    padding-left: 6%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.nav {
+  width: 100%;
+  padding-left: 6%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-.link{
-    text-decoration: none;
-    margin-left: 1.5%;
-    font-size: small;
-    color: rgba(0, 128, 0, 0.666);
+.link {
+  text-decoration: none;
+  margin-left: 1.5%;
+  font-size: small;
+  color: rgba(0, 128, 0, 0.666);
 }
-.link:hover{
-    color: blueviolet;
+.link:hover {
+  color: blueviolet;
 }
+
+/* animation */
+@keyframes background {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0.1;
+  }
+  25% {
+    opacity: 0.2;
+    transform: translateY(-75%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-50%);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translateY(-25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+

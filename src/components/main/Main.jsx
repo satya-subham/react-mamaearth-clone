@@ -98,90 +98,92 @@ export default function Main({ interval = 3000 }) {
 
   return (
     <>
+      <main>
       {isCart ? <Cart /> : undefined}
 
-      {isRegister ? <RegisterForm /> : undefined}
+{isRegister ? <RegisterForm /> : undefined}
 
-      <div className="banner">
-        <img
-          src={images[currentImageIndex]}
-          alt={`Slide ${currentImageIndex + 1}`}
-        />
+<section className="banner">
+  <img
+    src={images[currentImageIndex]}
+    alt={`Slide ${currentImageIndex + 1}`}
+  />
+</section>
+
+{loading ? (
+  <div className="loader-div">
+    <RingLoader
+      className="loader"
+      color={"#F37A24"}
+      loading={loading}
+      size={100}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
+  </div>
+) : (
+  <div className="main-container">
+    {filteredProduct.map((product, index) => (
+      <div className="item-container" key={index}>
+        <div className="best-seller">Best Seller</div>
+        <Link to={`/product/${product._id}`}>
+          <img src={product.images[0]} alt="" id="home_img" />
+        </Link>
+        <p className="item-para">{product.name}</p>
+        <p className="para" style={{ fontSize: "small" }}>
+          {product.title}
+        </p>
+        <p className="para">
+          <FontAwesomeIcon icon={faStar} className="fa-star" />
+          {product.rating} <span> | {product.reviews} reviews</span>
+        </p>
+        <p className="item-price">Rs: {product.price}</p>
+        <button
+          id="cart"
+          className="add-to-cart-btn"
+          onClick={() => handleAddToCart(product)}
+        >
+          Add to cart
+        </button>
       </div>
+    ))}
+  </div>
+)}
 
-      {loading ? (
-        <div className="loader-div">
-          <RingLoader
-            className="loader"
-            color={"#F37A24"}
-            loading={loading}
-            size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-      ) : (
-        <div className="main-container">
-          {filteredProduct.map((product, index) => (
-            <div className="item-container" key={index}>
-              <div className="best-seller">Best Seller</div>
-              <Link to={`/product/${product._id}`}>
-                <img src={product.images[0]} alt="" id="home_img" />
-              </Link>
-              <p className="item-para">{product.name}</p>
-              <p className="para" style={{ fontSize: "small" }}>
-                {product.title}
-              </p>
-              <p className="para">
-                <FontAwesomeIcon icon={faStar} className="fa-star" />
-                {product.rating} <span> | {product.reviews} reviews</span>
-              </p>
-              <p className="item-price">Rs: {product.price}</p>
-              <button
-                id="cart"
-                className="add-to-cart-btn"
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to cart
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <section>
-        <div className="video-section-text">
-          <div className="video-container">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/YROZybuYGUE"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <div className="text">
-            <h2>Our Goodness Promise</h2>
-            <p>
-              At Mamaearth, we live to spread a little love and goodness every
-              day. We believe that goodness isn’t a superpower, nor a special
-              gift, it’s inside all of us and it shows in the little choices we
-              make. Our mission is to bring you the best of nature through our
-              purest and most nurturing products that are made without any
-              toxins or harmful chemicals. For us goodness also means being good
-              to the earth. Which is why we recycle more plastic than we use and
-              we're PETA Certified - which means we never test on animals. This
-              is our #GoodnessInside.
-            </p>
-            <div>
-              <button>SHOP NOW</button>
-              <button>OUR PLEDGES</button>
-            </div>
-          </div>
-        </div>
-      </section>
+<section>
+  <div className="video-section-text">
+    <div className="video-container">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/YROZybuYGUE"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div className="text">
+      <h2>Our Goodness Promise</h2>
+      <p>
+        At Mamaearth, we live to spread a little love and goodness every
+        day. We believe that goodness isn’t a superpower, nor a special
+        gift, it’s inside all of us and it shows in the little choices we
+        make. Our mission is to bring you the best of nature through our
+        purest and most nurturing products that are made without any
+        toxins or harmful chemicals. For us goodness also means being good
+        to the earth. Which is why we recycle more plastic than we use and
+        we're PETA Certified - which means we never test on animals. This
+        is our #GoodnessInside.
+      </p>
+      <div>
+        <button>SHOP NOW</button>
+        <button>OUR PLEDGES</button>
+      </div>
+    </div>
+  </div>
+</section>
+      </main>
     </>
   );
 }

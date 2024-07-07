@@ -1,3 +1,10 @@
+main{
+
+  overflow: hidden;
+}
+.banner{
+  animation: banner 2s linear;
+}
 .banner img {
   width: 100%;
   margin-top: 129px;
@@ -11,6 +18,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  animation: maincontainer 2s linear;
 }
 .item-container {
   height: 500px;
@@ -75,6 +83,9 @@
   align-items: center;
   justify-content: space-evenly;
 }
+.video-container{
+  animation: maincontainer 2s linear;
+}
 .video-container iframe {
   border-radius: 10px;
 }
@@ -89,6 +100,7 @@
   text-align: left;
   padding: 10px;
   font-size: large;
+  animation: banner 2s linear;
 }
 .text div button {
   width: auto;
@@ -110,4 +122,51 @@
   width: 400px;
   height: 400px;
   margin: 100px 45%;
+}
+
+/* animation */
+@keyframes banner {
+  0% {
+    transform: translateX(100%);
+    opacity: 0.1;
+  }
+  25% {
+    opacity: 0.2;
+    transform: translateX(75%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(50%);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translateX(25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes maincontainer {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.1;
+  }
+  25% {
+    opacity: 0.2;
+    transform: translateX(-75%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translateX(-25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
 }
