@@ -6,6 +6,7 @@ import RingLoader from "react-spinners/RingLoader";
 import { MainContext } from "../../context/Context";
 import Cart from "../cart/Cart";
 import { Link } from "react-router-dom";
+import RegisterForm from "../registerform/RegisterForm";
 
 export default function Face({ interval = 3000 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -13,7 +14,7 @@ export default function Face({ interval = 3000 }) {
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { isCart, setIsCart, search, setSearch, user } =
+  const { isCart, setIsCart, isRegister, search, setSearch, user } =
     useContext(MainContext);
 
   const images = [
@@ -93,50 +94,51 @@ export default function Face({ interval = 3000 }) {
   return (
     <>
       <main>
-      {isCart ? <Cart /> : undefined}
-      <div className="banner">
-        <img
-          src={images[currentImageIndex]}
-          alt={`Slide ${currentImageIndex + 1}`}
-        />
-      </div>
-      {loading ? (
-        <div className="loader-div">
-          <RingLoader
-            className="loader"
-            color={"#F37A24"}
-            loading={loading}
-            size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
+        {isCart ? <Cart /> : undefined}
+        {isRegister ? <RegisterForm /> : undefined}
+        <div className="banner">
+          <img
+            src={images[currentImageIndex]}
+            alt={`Slide ${currentImageIndex + 1}`}
           />
         </div>
-      ) : (
-        <div className="main-container">
-          {filteredProduct.map((product, index) => (
-            <div className="item-container" key={index}>
-              <div className="best-seller">Best Seller</div>
-              <Link to={`/product/${product._id}`}>
-                <img src={product.images[0]} alt="" id="home_img" />
-              </Link>
-              <p className="item-para">{product.name}</p>
-              <p className="para">
-                <FontAwesomeIcon icon={faStar} className="fa-star" />
-                {(5 * parseInt(product.avg_rating_percent)) / 100}{" "}
-                <span> | {product.review_count} reviews</span>
-              </p>
-              <p className="item-price">{product.price}</p>
-              <button
-                id="cart"
-                className="add-to-cart-btn"
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to cart
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+        {loading ? (
+          <div className="loader-div">
+            <RingLoader
+              className="loader"
+              color={"#F37A24"}
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        ) : (
+          <div className="main-container">
+            {filteredProduct.map((product, index) => (
+              <div className="item-container" key={index}>
+                <div className="best-seller">Best Seller</div>
+                <Link to={`/product/${product._id}`}>
+                  <img src={product.images[0]} alt="" id="home_img" />
+                </Link>
+                <p className="item-para">{product.name}</p>
+                <p className="para">
+                  <FontAwesomeIcon icon={faStar} className="fa-star" />
+                  {(5 * parseInt(product.avg_rating_percent)) / 100}{" "}
+                  <span> | {product.review_count} reviews</span>
+                </p>
+                <p className="item-price">{product.price}</p>
+                <button
+                  id="cart"
+                  className="add-to-cart-btn"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Add to cart
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </main>
     </>
   );

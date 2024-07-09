@@ -6,6 +6,7 @@ import RingLoader from "react-spinners/RingLoader";
 import { MainContext } from "../../context/Context";
 import Cart from "../cart/Cart";
 import { Link } from "react-router-dom";
+import RegisterForm from "../registerform/RegisterForm";
 
 export default function Makeup({ interval = 3000 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -13,7 +14,7 @@ export default function Makeup({ interval = 3000 }) {
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { isCart, setIsCart, search, setSearch, user } =
+  const { isCart, setIsCart, isRegister, search, setSearch, user } =
     useContext(MainContext);
 
   const images = [
@@ -94,6 +95,7 @@ export default function Makeup({ interval = 3000 }) {
     <>
       <main>
       {isCart ? <Cart /> : undefined}
+      {isRegister ? <RegisterForm /> : undefined}
       <div className="banner">
         <img
           src={images[currentImageIndex]}

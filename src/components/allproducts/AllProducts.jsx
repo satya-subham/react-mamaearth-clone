@@ -8,6 +8,7 @@ import Cart from "../cart/Cart";
 
 import "./AllProducts.css";
 import { Link } from "react-router-dom";
+import RegisterForm from "../registerform/RegisterForm";
 
 export default function AllProducts({ interval = 3000 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -16,7 +17,7 @@ export default function AllProducts({ interval = 3000 }) {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState("");
 
-  const { isCart, setIsCart, search, setSearch, user } =
+  const { isCart, setIsCart, isRegister, search, setSearch, user } =
     useContext(MainContext);
 
   const images = [
@@ -87,13 +88,16 @@ export default function AllProducts({ interval = 3000 }) {
     };
 
     try {
-      const user = await fetch("https://mamarath-backend.vercel.app/api/v1/users/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const user = await fetch(
+        "https://mamarath-backend.vercel.app/api/v1/users/cart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
     } catch (error) {
       console.log(error.message);
     }
@@ -102,59 +106,61 @@ export default function AllProducts({ interval = 3000 }) {
   return (
     <>
       <main>
-      {isCart ? <Cart /> : undefined}
-      <div className="banner">
-        <img
-          src={images[currentImageIndex]}
-          alt={`Slide ${currentImageIndex + 1}`}
-        />
-      </div>
-      <div className="select">
-        <select name="select" id="select" onChange={handleSelect}>
-          <option value="">Select</option>
-          <option value="low-to-high">Low to high</option>
-          <option value="high-to-low">High to low</option>
-        </select>
-      </div>
-      {loading ? (
-        <div className="loader-div">
-          <RingLoader
-            className="loader"
-            color={"#F37A24"}
-            loading={loading}
-            size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
+        {isCart ? <Cart /> : undefined}
+
+        {isRegister ? <RegisterForm /> : undefined}
+        <div className="banner">
+          <img
+            src={images[currentImageIndex]}
+            alt={`Slide ${currentImageIndex + 1}`}
           />
         </div>
-      ) : (
-        <div className="main-container">
-          {filteredProduct.map((product, index) => (
-            <div className="item-container" key={index}>
-              <div className="best-seller">Best Seller</div>
-              <Link to={`/product/${product._id}`}>
-                <img src={product.images[0]} alt="" id="home_img" />
-              </Link>
-              <p className="item-para">{product.name}</p>
-              <p className="para" style={{ fontSize: "small" }}>
-                {product.title}
-              </p>
-              <p className="para">
-                <FontAwesomeIcon icon={faStar} className="fa-star" />
-                {product.rating} <span> | {product.reviews} reviews</span>
-              </p>
-              <p className="item-price">Rs: {product.price}</p>
-              <button
-                id="cart"
-                className="add-to-cart-btn"
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to cart
-              </button>
-            </div>
-          ))}
+        <div className="select">
+          <select name="select" id="select" onChange={handleSelect}>
+            <option value="">Select</option>
+            <option value="low-to-high">Low to high</option>
+            <option value="high-to-low">High to low</option>
+          </select>
         </div>
-      )}
+        {loading ? (
+          <div className="loader-div">
+            <RingLoader
+              className="loader"
+              color={"#F37A24"}
+              loading={loading}
+              size={100}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        ) : (
+          <div className="main-container">
+            {filteredProduct.map((product, index) => (
+              <div className="item-container" key={index}>
+                <div className="best-seller">Best Seller</div>
+                <Link to={`/product/${product._id}`}>
+                  <img src={product.images[0]} alt="" id="home_img" />
+                </Link>
+                <p className="item-para">{product.name}</p>
+                <p className="para" style={{ fontSize: "small" }}>
+                  {product.title}
+                </p>
+                <p className="para">
+                  <FontAwesomeIcon icon={faStar} className="fa-star" />
+                  {product.rating} <span> | {product.reviews} reviews</span>
+                </p>
+                <p className="item-price">Rs: {product.price}</p>
+                <button
+                  id="cart"
+                  className="add-to-cart-btn"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Add to cart
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </main>
     </>
   );
