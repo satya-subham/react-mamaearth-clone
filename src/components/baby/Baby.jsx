@@ -86,6 +86,7 @@ export default function Baby({ interval = 3000 }) {
 
   return (
     <>
+      <main>
       {isCart ? <Cart /> : undefined}
       <div className="banner">
         <img
@@ -130,6 +131,7 @@ export default function Baby({ interval = 3000 }) {
           ))}
         </div>
       )}
+      </main>
     </>
   );
 }

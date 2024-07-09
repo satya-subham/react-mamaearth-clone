@@ -92,6 +92,7 @@ export default function GiftsPack({ interval = 3000 }) {
 
   return (
     <>
+      <main>
       {isCart ? <Cart /> : undefined}
       <div className="banner">
         <img
@@ -137,6 +138,7 @@ export default function GiftsPack({ interval = 3000 }) {
           ))}
         </div>
       )}
+      </main>
     </>
   );
 }

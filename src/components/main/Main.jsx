@@ -104,7 +104,7 @@ export default function Main({ interval = 3000 }) {
 {isRegister ? <RegisterForm /> : undefined}
 
 <section className="banner">
-  <img
+  <img 
     src={images[currentImageIndex]}
     alt={`Slide ${currentImageIndex + 1}`}
   />

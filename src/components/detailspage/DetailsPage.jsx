@@ -60,6 +60,7 @@ export default function DetailsPage({ interval = 3000 }) {
 
   return (
     <>
+      <main>
       {isCart ? <Cart /> : undefined}
       <div className="banner">
         <img
@@ -92,6 +93,7 @@ export default function DetailsPage({ interval = 3000 }) {
           </button>
         </div>
       </div>
+      </main>
     </>
   );
 }
