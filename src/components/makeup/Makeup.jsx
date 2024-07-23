@@ -124,10 +124,10 @@ export default function Makeup({ interval = 3000 }) {
               <p className="item-para">{product.name}</p>
               <p className="para">
                 <FontAwesomeIcon icon={faStar} className="fa-star" />
-                {(5 * parseInt(product.avg_rating_percent)) / 100}{" "}
-                <span> | {product.review_count} reviews</span>
+                {product.rating}{" "}
+                <span> | {product.reviews} reviews</span>
               </p>
-              <p className="item-price">{product.price}</p>
+              <p className="item-price">Rs: {product.price}</p>
               <button
                 id="cart"
                 className="add-to-cart-btn"
