@@ -16,6 +16,7 @@ import Makeup from './components/makeup/Makeup';
 import Face from './components/face/Face';
 import Baby from './components/baby/Baby';
 
+
 function App() {
 
   const router = createBrowserRouter([

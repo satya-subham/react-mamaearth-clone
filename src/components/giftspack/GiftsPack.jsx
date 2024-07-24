@@ -123,6 +123,9 @@ export default function GiftsPack({ interval = 3000 }) {
                 <img src={product.images[0]} alt="" id="home_img" />
               </Link>
               <p className="item-para">{product.name}</p>
+              <p className="para" style={{ fontSize: "small" }}>
+                  {product.title}
+                </p>
               <p className="para">
                 <FontAwesomeIcon icon={faStar} className="fa-star" />
                 {product.rating}{" "}

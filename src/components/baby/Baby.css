@@ -1,0 +1,15 @@
+.buttons{
+    width: 30%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 20px 0 -40px 140px;
+}
+.buttons button{
+    padding: 5px 8px;
+    border-radius: 20px;
+    border: 1px solid blueviolet;
+    background: none;
+    color: blueviolet;
+}

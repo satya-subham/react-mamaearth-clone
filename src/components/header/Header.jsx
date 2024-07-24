@@ -74,7 +74,7 @@ export default function Header() {
     },
     {
       to: "/allproducts",
-      name: "ALL PRODUCTS",
+      name: "ALLPRODUCTS",
     },
     {
       to: "/blog",
@@ -85,8 +85,8 @@ export default function Header() {
       name: "PLANTGOODNESS",
     },
     {
-      to: "/storelocator",
-      name: "STORE LOCATOR",
+      to: "/store",
+      name: "STORE",
     },
   ];
 

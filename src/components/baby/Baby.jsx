@@ -8,6 +8,8 @@ import Cart from "../cart/Cart";
 import { Link } from "react-router-dom";
 import RegisterForm from "../registerform/RegisterForm";
 
+import './Baby.css'
+
 export default function Baby({ interval = 3000 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
@@ -85,6 +87,22 @@ export default function Baby({ interval = 3000 }) {
     }
   };
 
+  const [buttons, setButtons] = useState(['ALL', 'BODY LOTION', 'WASH', 'SOAP', 'SHAMPOO', 'HAIR OIL']);
+
+  const handleFilter = (e) =>{
+    console.log(e.target.value);
+    if(e.target.value === 'ALL'){
+      return setFilteredProduct(products)
+    }
+    let filterBabyProducts = products.filter((product) =>{
+      if(product.name){
+        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+      }
+    })
+
+    setFilteredProduct(filterBabyProducts)
+  }
+
   return (
     <>
       <main>
@@ -95,6 +113,11 @@ export default function Baby({ interval = 3000 }) {
             src={images[currentImageIndex]}
             alt={`Slide ${currentImageIndex + 1}`}
           />
+        </div>
+        <div className="buttons">
+          {buttons.map((button)=>(
+            <button type="button" value={button} onClick={handleFilter}>{button}</button>
+          ))}
         </div>
         {loading ? (
           <div className="loader-div">
@@ -116,6 +139,9 @@ export default function Baby({ interval = 3000 }) {
                   <img src={product.images[0]} alt="" id="home_img" />
                 </Link>
                 <p className="item-para">{product.name}</p>
+                <p className="para" style={{ fontSize: "small" }}>
+                  {product.title}
+                </p>
                 <p className="para">
                   <FontAwesomeIcon icon={faStar} className="fa-star" />
                   {product.rating}{" "}
