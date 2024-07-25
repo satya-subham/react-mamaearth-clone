@@ -66,6 +66,22 @@ export default function Hair({ interval = 3000 }) {
     setFilteredProduct(filteredProducts);
   }, [search]);
 
+  const [buttons, setButtons] = useState(['ALL', 'CONDITIONER', 'MASK', 'SERUM', 'SHAMPOO', 'HAIR OIL']);
+
+  const handleFilter = (e) =>{
+    console.log(e.target.value);
+    if(e.target.value === 'ALL'){
+      return setFilteredProduct(products)
+    }
+    let filterBabyProducts = products.filter((product) =>{
+      if(product.name){
+        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+      }
+    })
+
+    setFilteredProduct(filterBabyProducts)
+  }
+
   const handleAddToCart = async (product) => {
     if (!user) {
       return alert("please log in to add to cart");
@@ -102,6 +118,11 @@ export default function Hair({ interval = 3000 }) {
           alt={`Slide ${currentImageIndex + 1}`}
         />
       </div>
+      <div className="buttons">
+          {buttons.map((button)=>(
+            <button type="button" value={button} onClick={handleFilter}>{button}</button>
+          ))}
+        </div>
       {loading ? (
         <div className="loader-div">
           <RingLoader

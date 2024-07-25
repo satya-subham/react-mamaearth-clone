@@ -68,6 +68,23 @@ export default function AllProducts({ interval = 3000 }) {
     setFilteredProduct(filteredProducts);
   }, [search]);
 
+
+  const [buttons, setButtons] = useState(['ALL', 'BODY', 'FACE', 'BABIES', 'HAIR']);
+
+  const handleFilter = (e) =>{
+    console.log(e.target.value);
+    if(e.target.value === 'ALL'){
+      return setFilteredProduct(products)
+    }
+    let filterBabyProducts = products.filter((product) =>{
+      if(product.name){
+        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+      }
+    })
+
+    setFilteredProduct(filterBabyProducts)
+  }
+
   const handleSelect = (e) => {
     setSelected(e.target.value);
     if (e.target.value === "low-to-high") {
@@ -121,6 +138,11 @@ export default function AllProducts({ interval = 3000 }) {
             <option value="low-to-high">Low to high</option>
             <option value="high-to-low">High to low</option>
           </select>
+        </div>
+        <div className="buttons">
+          {buttons.map((button)=>(
+            <button type="button" value={button} onClick={handleFilter}>{button}</button>
+          ))}
         </div>
         {loading ? (
           <div className="loader-div">
