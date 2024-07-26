@@ -5,7 +5,7 @@
     cursor: pointer;
     border-top: 2px solid blueviolet;
     position: fixed;
-    top: 55px;
+    top: 40px;
     right: 10px;
     z-index: 3;
 }

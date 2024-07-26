@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { MainContext } from "../../context/Context";
 import axios from "axios";
+import AllProducts from "../allproducts/AllProducts";
 
 import "./Cart.css";
 
 export default function Cart() {
   const { isCart, setIsCart, user, setUser } = useContext(MainContext);
   const [cartArr, setCartArr] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleCloseModal = () => {
     setIsCart((prev) => !prev);
@@ -61,6 +65,12 @@ export default function Cart() {
     }
   };
 
+  const handleShop = () =>{
+    navigate('/allproducts');
+    setIsCart((prev) => !prev);
+    document.body.style.overflow = "auto";
+  }
+
   return (
     <>
       <div className="cart-container">
@@ -71,7 +81,11 @@ export default function Cart() {
             </button>
           </div>
           {cartArr.length === 0 ? (
-            <h1>Your cart is empty !</h1>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+              <img src="https://images.mamaearth.in/wysiwyg/bags2x.png?format=auto&fit=scale" alt="" width="200px" height="200px"/>
+              <h2>Your cart is empty !</h2>
+              <button style={{backgroundColor: 'blueviolet', color: 'white', padding: '5px 15px', border: 'none', borderRadius: '5px', marginTop: '10px'}} onClick={handleShop}>shop now</button>
+            </div>
           ) : (
             <div className="cart_content3 ">
               {cartArr?.map((item, index) => (

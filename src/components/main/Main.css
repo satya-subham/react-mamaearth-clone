@@ -1,5 +1,4 @@
 main{
-
   overflow: hidden;
 }
 .banner{
@@ -7,7 +6,7 @@ main{
 }
 .banner img {
   width: 100%;
-  margin-top: 129px;
+  margin-top: 98px;
 }
 .image-animation{
   animation: banner 2s linear;

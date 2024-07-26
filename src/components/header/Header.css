@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 0px 0;
   border-bottom: 1px solid rgba(0, 128, 0, 0.388);
 }
 .logo-input {
@@ -61,6 +61,7 @@
 }
 .cart-login img {
   width: 35%;
+  height: 8vh;
 }
 .cart-login button {
   background: none;
