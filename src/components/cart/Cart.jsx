@@ -9,13 +9,17 @@ import AllProducts from "../allproducts/AllProducts";
 import "./Cart.css";
 
 export default function Cart() {
-  const { isCart, setIsCart, user, setUser } = useContext(MainContext);
+  const { isCart, setIsCart, user, setUser, yes, setYes } = useContext(MainContext);
   const [cartArr, setCartArr] = useState([]);
 
   const navigate = useNavigate();
 
   const handleCloseModal = () => {
-    setIsCart((prev) => !prev);
+    setYes((prev)=>!prev)
+    setTimeout(()=>{
+      setIsCart((prev) => !prev);
+      setYes((prev)=>!prev)
+    }, 1000)
     document.body.style.overflow = "auto";
   };
 
@@ -74,7 +78,7 @@ export default function Cart() {
   return (
     <>
       <div className="cart-container">
-        <div className="cart-product-container">
+        <div className={yes ? "remove-cart-product-container" : "cart-product-container"}>
           <div className="cart-header">
             <button onClick={handleCloseModal} className="left-arrow">
               <FontAwesomeIcon icon={faArrowLeft} className="faArrowLeft" />
