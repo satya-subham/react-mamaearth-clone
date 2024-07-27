@@ -66,7 +66,7 @@ export default function Face({ interval = 3000 }) {
     setFilteredProduct(filteredProducts);
   }, [search]);
 
-  const [buttons, setButtons] = useState(['ALL', 'WASH', 'CREAM', 'SERUM', 'SUNCARE', 'MOISTURISER', 'MASK', 'KIT', 'SCRUB', 'TONER']);
+  const [buttons, setButtons] = useState(['ALL', 'WASH', 'CREAM', 'SERUM', 'SUNSCREEN', 'MOISTURIZER', 'FACEMASK', 'KIT', 'SCRUB', 'TONER']);
 
   const handleFilter = (e) =>{
     console.log(e.target.value);

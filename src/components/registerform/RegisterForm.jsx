@@ -37,10 +37,13 @@ export default function () {
     }));
   };
 
-  const { isRegister, setIsRegister, user, setUser } = useContext(MainContext);
+  const { isRegister, setIsRegister, user, setUser, registerModal, setRegisterModal } = useContext(MainContext);
 
   const handleCloseModal = () => {
-    setIsRegister((prev) => !prev);
+    setRegisterModal((prev) => !prev);
+    setTimeout(()=>{
+      setIsRegister((prev) => !prev);
+    }, 1000)
     document.body.style.overflow = "auto";
   };
 
@@ -118,7 +121,7 @@ export default function () {
     <>
       {loginModal ? (
         <div className="register-container">
-          <div className="register-product-container">
+          <div className={registerModal ? "register-product-container" : "remove-register-product-container"}>
             <div className="register-header">
               <button onClick={handleCloseModal} className="left-arrow">
                 <FontAwesomeIcon icon={faArrowLeft} className="faArrowLeft" />
@@ -153,7 +156,7 @@ export default function () {
                 <br />
                 <button id="sign-up">Log In</button>
               </form>
-              <p>
+              <p style={{margin: '0 23%'}}>
                 Not registered yet?{" "}
                 <button id="log-in" onClick={handleLoginModal}>
                   Register
@@ -165,7 +168,7 @@ export default function () {
         </div>
       ) : (
         <div className="register-container">
-          <div className="register-product-container">
+          <div className={registerModal ? "register-product-container" : "remove-register-product-container"}>
             <div className="register-header">
               <button onClick={handleCloseModal} className="left-arrow">
                 <FontAwesomeIcon icon={faArrowLeft} className="faArrowLeft" />
@@ -295,7 +298,7 @@ export default function () {
                 <br />
                 <button id="sign-up">Sign Up</button>
               </form>
-              <p>
+              <p style={{margin: '0 23%'}}>
                 Already registered ?{" "}
                 <button id="log-in" onClick={handleLoginModal}>
                   LogIn

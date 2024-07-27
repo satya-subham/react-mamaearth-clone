@@ -9,6 +9,7 @@ function Context({ children }) {
   const [search, setSearch] = useState("");
   const [user, setUser] = useState();
   const [yes, setYes] = useState(false);
+  const [registerModal, setRegisterModal] = useState(false);
 
   return (
     <MainContext.Provider
@@ -24,7 +25,9 @@ function Context({ children }) {
         user,
         setUser,
         yes, 
-        setYes
+        setYes,
+        registerModal,
+        setRegisterModal
       }}
     >
       {children}

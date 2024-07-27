@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { MainContext } from "../../context/Context";
 import axios from "axios";
-import AllProducts from "../allproducts/AllProducts";
 
 import "./Cart.css";
 
@@ -86,7 +85,7 @@ export default function Cart() {
           </div>
           {cartArr.length === 0 ? (
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
-              <img src="https://images.mamaearth.in/wysiwyg/bags2x.png?format=auto&fit=scale" alt="" width="200px" height="200px"/>
+              <img src="https://images.mamaearth.in/wysiwyg/bags2x.png?format=auto&fit=scale" alt="Image" width="200px" height="200px"/>
               <h2>Your cart is empty !</h2>
               <button style={{backgroundColor: 'blueviolet', color: 'white', padding: '5px 15px', border: 'none', borderRadius: '5px', marginTop: '10px'}} onClick={handleShop}>shop now</button>
             </div>

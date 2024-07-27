@@ -15,6 +15,17 @@
   top: 10%;
   left: 35%;
   border-radius: 10px;
+  animation: dividend 1s linear;
+}
+.remove-register-product-container {
+  width: 30%;
+  height: 80%;
+  background-color: whitesmoke;
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  border-radius: 10px;
+  animation: individend 1s linear;
 }
 .register-header {
   height: 50px;
@@ -85,4 +96,27 @@ p{
   border: none;
   border-radius: 5px;
   padding: 5px;
+}
+
+/* animation */
+@keyframes dividend {
+  0%{
+    scale: 0;
+    opacity: 0;
+  }
+  100%{
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes individend {
+  0%{
+    scale: 1;
+    opacity: 1;
+  }
+  100%{
+    scale: 0;
+    opacity: 0;
+  }
 }

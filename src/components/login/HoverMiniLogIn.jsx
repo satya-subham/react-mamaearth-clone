@@ -19,6 +19,8 @@ export default function HoverMiniLogIn() {
     setIsRegister,
     user,
     setUser,
+    registerModal, 
+    setRegisterModal
   } = useContext(MainContext);
 
   const onMouseEnter = () => {
@@ -30,6 +32,7 @@ export default function HoverMiniLogIn() {
 
   const handleRegisterModal = () => {
     setIsRegister((prev) => !prev);
+    setRegisterModal((prev) => !prev);
     document.body.style.overflow = "hidden";
   };
 
