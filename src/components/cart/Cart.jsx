@@ -4,14 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { MainContext } from "../../context/Context";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux"
 
 import "./Cart.css";
+import { fetchCart, removeProductFromCart } from "../../store/cart-slice";
 
 export default function Cart() {
   const { isCart, setIsCart, user, setUser, yes, setYes } = useContext(MainContext);
-  const [cartArr, setCartArr] = useState([]);
-
+  // const [cartArr, setCartArr] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cartData = useSelector((state) => state.cart.cartItems);
+  const totalAmount = useSelector((state) => state.cart.totalAmount);
 
   const handleCloseModal = () => {
     setYes((prev)=>!prev)
@@ -23,49 +27,15 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    axios
-      .get("https://mamarath-backend.vercel.app/api/v1/users/loggedInUser", {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response.data);
-        // setUser(response.data)
-        setCartArr(response.data.cart);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    dispatch(fetchCart())
+  }, [dispatch]);
 
-  const handleRemoveCart = async (id) => {
-    for (let i = 0; i < cartArr.length; i++) {
-      const element = cartArr[i];
-      if (element._id === id) {
-        cartArr.splice(i, 1);
-      }
-    }
-
+  const handleRemoveCart = (id) => {
     const body = {
       email: user.email,
       id: id,
     };
-
-    console.log(body);
-
-    try {
-      const user = await fetch(
-        `https://mamarath-backend.vercel.app/api/v1/users/cart/${body.email}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
+    dispatch(removeProductFromCart(body));
   };
 
   const handleShop = () =>{
@@ -83,7 +53,7 @@ export default function Cart() {
               <FontAwesomeIcon icon={faArrowLeft} className="faArrowLeft" />
             </button>
           </div>
-          {cartArr.length === 0 ? (
+          {cartData.length === 0 ? (
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
               <img src="https://images.mamaearth.in/wysiwyg/bags2x.png?format=auto&fit=scale" alt="Image" width="200px" height="200px"/>
               <h2>Your cart is empty !</h2>
@@ -91,7 +61,7 @@ export default function Cart() {
             </div>
           ) : (
             <div className="cart_content3 ">
-              {cartArr?.map((item, index) => (
+              {cartData?.map((item, index) => (
                 <div className="cart_data" id="cont${item.id}" key={index}>
                   <div>
                     <img
@@ -101,8 +71,8 @@ export default function Cart() {
                     />
                   </div>
                   <div class="cart-img-text">
-                    <p className="image_name">${item.name}</p>
-                    <p className="price_name"> Rs.${item.price}</p>
+                    <p className="image_name">{item.name}</p>
+                    <p className="price_name"> Rs.{item.price}</p>
                   </div>
                   <div>
                     <button
@@ -116,6 +86,9 @@ export default function Cart() {
               ))}
             </div>
           )}
+          <div className="bg-blue-700 text-white flex justify-center items-center p-4 h-[5vh]">
+            <button>total : {cartData.length} Buy Rs.{totalAmount}</button>
+          </div>
         </div>
       </div>
     </>

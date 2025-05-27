@@ -15,6 +15,9 @@
   top: 0;
   right: 0;
   animation: banner 1s linear;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .remove-cart-product-container {
   width: 30%;

@@ -6,6 +6,8 @@ import { faCartArrowDown, faUser } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { MainContext } from "../../context/Context";
 import HoverMiniLogIn from "../login/HoverMiniLogIn";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCart } from "../../store/cart-slice";
 
 export default function Header() {
   const {
@@ -18,6 +20,9 @@ export default function Header() {
     user,
     setUser,
   } = useContext(MainContext);
+
+  const {totalQuantity, name, email} = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -91,17 +96,7 @@ export default function Header() {
   ];
 
   useEffect(() => {
-    axios
-      .get("https://mamarath-backend.vercel.app/api/v1/users/loggedInUser", {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response.data);
-        setUser(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(fetchCart());
   }, []);
 
   return (
@@ -132,11 +127,12 @@ export default function Header() {
               <button onClick={handleCartModal}>
                 <FontAwesomeIcon icon={faCartArrowDown} />
                 Cart
+                {totalQuantity}
               </button>
-              {user ? (
+              {name ? (
                 <button onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
                   <FontAwesomeIcon icon={faUser} />
-                  {user.firstName}
+                  {name}
                 </button>
               ) : (
                 <button onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
