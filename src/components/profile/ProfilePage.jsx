@@ -4,19 +4,26 @@ import axios from "axios";
 import { MainContext } from "../../context/Context";
 
 import "./ProfilePage.css";
+import { useSelector } from "react-redux";
 
 function ProfilePage() {
-  const { user, setUser } = useContext(MainContext);
+  const {name, email} = useSelector((state) => state.cart);
 
-  console.log(user);
   return (
     <>
-      <div className="profile-page-container">
-        <h1>Profile Details</h1>
-        <h3>{user?.firstName}</h3>
-        <h3>{user?.lastName}</h3>
-        <h3>{user?.email}</h3>
-      </div>
+      {
+        name ? (
+          <div className="profile-page-container">
+            <h1>Profile Details</h1>
+            <h3>{name}</h3>
+            <h3>{email}</h3>
+        </div>
+        ) : (
+          <div className="profile-page-container">
+           <p>Please Login</p>
+          </div>
+        )
+      }
     </>
   );
 }

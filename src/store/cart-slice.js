@@ -6,6 +6,7 @@ const initialState = {
   totalQuantity: 0,
   name: "",
   email: "",
+  msg: "",
 };
 export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
   const response = await axios
@@ -17,7 +18,7 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
 
 });
 export const removeProductFromCart = createAsyncThunk("cart/removeProductFromCart", async (body) => {
-    console.log("remove step 2")
+    console.log("remove product from cart step 2")
     const res = await fetch(
         `https://mamarath-backend.vercel.app/api/v1/users/cart/${body.email}`,
         {
@@ -77,7 +78,13 @@ const cartSlice = createSlice({
     });
 
     builder.addCase(removeProductFromCart.fulfilled, (state, action) => {
-
+      console.log("remove product from cart step 3")
+      state.msg = "Product removed from cart successfully";
+      state.cartItems = state.cartItems.filter(
+        (item) => item._id !== action.payload.id
+      );
+      state.totalQuantity--;
+      state.totalAmount -= action.payload.price * action.payload.quantity;
     });
   },
 });

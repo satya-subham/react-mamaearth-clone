@@ -1,4 +1,4 @@
-.cart-container {
+/* .cart-container {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.638);
@@ -6,8 +6,8 @@
   top: 0;
   left: 0;
   z-index: 5;
-}
-.cart-product-container {
+} */
+/* .cart-product-container {
   width: 30%;
   height: 100%;
   background-color: white;
@@ -27,12 +27,12 @@
   top: 0;
   right: 0;
   animation: remove-cart 1s linear;
-}
-.cart-header {
+} */
+/* .cart-header {
   height: 50px;
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
-}
-.faArrowLeft {
+} */
+/* .faArrowLeft {
   font-size: large;
   color: blueviolet;
   margin: 15px 10px;
@@ -41,17 +41,17 @@
   background: none;
   border: none;
   float: left;
-}
-button:hover {
+} */
+/* button:hover {
   cursor: pointer;
-}
-.cart_content3 {
+} */
+/* .cart_content3 {
   width: 100%;
   height: 85%;
   overflow-x: hidden;
   overflow-y: auto;
-}
-.cart_data {
+} */
+/* .cart_data {
   height: 120px;
   width: 100%;
   display: flex;
@@ -59,24 +59,24 @@ button:hover {
   justify-content: space-evenly;
   border-bottom: 1px solid black;
   margin: 10px;
-}
+} */
 
-.cart_image_name {
+/* .cart_image_name {
   width: 100px;
   height: 100px;
-}
-.cart-img-text {
+} */
+/* .cart-img-text {
   width: 50%;
-}
-.image_name {
+} */
+/* .image_name {
   font-size: 15px;
   color: rgb(144, 104, 182);
-}
+} */
 
-.price_name {
+/* .price_name {
   color: blueviolet;
-}
-.deletebutton {
+} */
+/* .deletebutton {
   width: 60px;
   height: 30px;
   border: none;
@@ -86,7 +86,7 @@ button:hover {
   font-style: italic;
   font-weight: bold;
   cursor: pointer;
-}
+} */
 
 
 /* animation */
