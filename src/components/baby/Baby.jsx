@@ -7,14 +7,18 @@ import { MainContext } from "../../context/Context";
 import Cart from "../cart/Cart";
 import { Link } from "react-router-dom";
 import RegisterForm from "../registerform/RegisterForm";
+import { ToastContainer, toast } from "react-toastify";
 
-import './Baby.css'
+import "./Baby.css";
+import { useSelector } from "react-redux";
 
 export default function Baby({ interval = 3000 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { msg, name, email } = useSelector((state) => state.cart);
 
   const { isCart, setIsCart, isRegister, search, setSearch, user } =
     useContext(MainContext);
@@ -63,11 +67,11 @@ export default function Baby({ interval = 3000 }) {
   }, [search]);
 
   const handleAddToCart = async (product) => {
-    if (!user) {
+    if (!name) {
       return alert("please log in to add to cart");
     }
     const body = {
-      email: user.email,
+      email: email,
       product: product,
     };
 
@@ -84,28 +88,57 @@ export default function Baby({ interval = 3000 }) {
       );
     } catch (error) {
       console.log(error.message);
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
+
+    toast.success("Product Added Successfully", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
-  const [buttons, setButtons] = useState(['ALL', 'BODY LOTION', 'WASH', 'SOAP', 'SHAMPOO', 'HAIR OIL']);
+  const [buttons, setButtons] = useState([
+    "ALL",
+    "BODY LOTION",
+    "WASH",
+    "SOAP",
+    "SHAMPOO",
+    "HAIR OIL",
+  ]);
 
-  const handleFilter = (e) =>{
+  const handleFilter = (e) => {
     console.log(e.target.value);
-    if(e.target.value === 'ALL'){
-      return setFilteredProduct(products)
+    if (e.target.value === "ALL") {
+      return setFilteredProduct(products);
     }
-    let filterBabyProducts = products.filter((product) =>{
-      if(product.name){
-        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+    let filterBabyProducts = products.filter((product) => {
+      if (product.name) {
+        return product.name
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase());
       }
-    })
+    });
 
-    setFilteredProduct(filterBabyProducts)
-  }
+    setFilteredProduct(filterBabyProducts);
+  };
 
   return (
     <>
       <main>
+        <ToastContainer />
         {isCart ? <Cart /> : undefined}
         {isRegister ? <RegisterForm /> : undefined}
         <div className="banner">
@@ -115,8 +148,10 @@ export default function Baby({ interval = 3000 }) {
           />
         </div>
         <div className="buttons">
-          {buttons.map((button)=>(
-            <button type="button" value={button} onClick={handleFilter}>{button}</button>
+          {buttons.map((button) => (
+            <button type="button" value={button} onClick={handleFilter}>
+              {button}
+            </button>
           ))}
         </div>
         {loading ? (
@@ -144,8 +179,7 @@ export default function Baby({ interval = 3000 }) {
                 </p>
                 <p className="para">
                   <FontAwesomeIcon icon={faStar} className="fa-star" />
-                  {product.rating}{" "}
-                  <span> | {product.reviews} reviews</span>
+                  {product.rating} <span> | {product.reviews} reviews</span>
                 </p>
                 <p className="item-price">Rs: {product.price}</p>
                 <button

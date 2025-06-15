@@ -9,6 +9,8 @@ import Cart from "../cart/Cart";
 import "./AllProducts.css";
 import { Link } from "react-router-dom";
 import RegisterForm from "../registerform/RegisterForm";
+import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function AllProducts({ interval = 3000 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -16,6 +18,8 @@ export default function AllProducts({ interval = 3000 }) {
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState("");
+
+  const { msg, name, email } = useSelector((state) => state.cart);
 
   const { isCart, setIsCart, isRegister, search, setSearch, user } =
     useContext(MainContext);
@@ -68,22 +72,29 @@ export default function AllProducts({ interval = 3000 }) {
     setFilteredProduct(filteredProducts);
   }, [search]);
 
+  const [buttons, setButtons] = useState([
+    "ALL",
+    "BODY",
+    "FACE",
+    "BABIES",
+    "HAIR",
+  ]);
 
-  const [buttons, setButtons] = useState(['ALL', 'BODY', 'FACE', 'BABIES', 'HAIR']);
-
-  const handleFilter = (e) =>{
+  const handleFilter = (e) => {
     console.log(e.target.value);
-    if(e.target.value === 'ALL'){
-      return setFilteredProduct(products)
+    if (e.target.value === "ALL") {
+      return setFilteredProduct(products);
     }
-    let filterBabyProducts = products.filter((product) =>{
-      if(product.name){
-        return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+    let filterBabyProducts = products.filter((product) => {
+      if (product.name) {
+        return product.name
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase());
       }
-    })
+    });
 
-    setFilteredProduct(filterBabyProducts)
-  }
+    setFilteredProduct(filterBabyProducts);
+  };
 
   const handleSelect = (e) => {
     setSelected(e.target.value);
@@ -100,7 +111,7 @@ export default function AllProducts({ interval = 3000 }) {
 
   const handleAddToCart = async (product) => {
     const body = {
-      email: user.email,
+      email: email,
       product: product,
     };
 
@@ -117,12 +128,31 @@ export default function AllProducts({ interval = 3000 }) {
       );
     } catch (error) {
       console.log(error.message);
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
+    toast.success("Product Added Successfully", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
     <>
       <main>
+        <ToastContainer />
         {isCart ? <Cart /> : undefined}
 
         {isRegister ? <RegisterForm /> : undefined}
@@ -140,8 +170,10 @@ export default function AllProducts({ interval = 3000 }) {
           </select>
         </div>
         <div className="buttons">
-          {buttons.map((button)=>(
-            <button type="button" value={button} onClick={handleFilter}>{button}</button>
+          {buttons.map((button) => (
+            <button type="button" value={button} onClick={handleFilter}>
+              {button}
+            </button>
           ))}
         </div>
         {loading ? (

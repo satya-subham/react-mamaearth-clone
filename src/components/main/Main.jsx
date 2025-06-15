@@ -7,15 +7,19 @@ import { MainContext } from "../../context/Context";
 import Cart from "../cart/Cart";
 import HoverMiniLogIn from "../login/HoverMiniLogIn";
 import RegisterForm from "../registerform/RegisterForm";
+import { ToastContainer, toast } from "react-toastify";
 
 import "./Main.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Main({ interval = 3000 }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { msg, name, email } = useSelector((state) => state.cart);
 
   const {
     isCart,
@@ -26,7 +30,6 @@ export default function Main({ interval = 3000 }) {
     setIsRegister,
     search,
     setSearch,
-    user,
   } = useContext(MainContext);
 
   const images = [
@@ -73,11 +76,11 @@ export default function Main({ interval = 3000 }) {
   }, [search]);
 
   const handleAddToCart = async (product) => {
-    if (!user) {
+    if (!name) {
       return alert("please log in to add to cart");
     }
     const body = {
-      email: user.email,
+      email: email,
       product: product,
     };
 
@@ -93,13 +96,33 @@ export default function Main({ interval = 3000 }) {
         }
       );
     } catch (error) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.log(error.message);
     }
+
+    toast.success("Product Added Successfully", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
     <>
       <main>
+        <ToastContainer />
         {isCart ? <Cart /> : undefined}
 
         {isRegister ? <RegisterForm /> : undefined}
