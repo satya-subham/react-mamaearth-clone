@@ -1,4 +1,4 @@
-.register-container {
+/* .register-container {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.638);
@@ -6,8 +6,8 @@
   top: 0;
   left: 0;
   z-index: 5;
-}
-.register-product-container {
+} */
+/* .register-product-container {
   width: 30%;
   height: 80%;
   background-color: whitesmoke;
@@ -16,8 +16,8 @@
   left: 35%;
   border-radius: 10px;
   animation: dividend 1s linear;
-}
-.remove-register-product-container {
+} */
+/* .remove-register-product-container {
   width: 30%;
   height: 80%;
   background-color: whitesmoke;
@@ -26,77 +26,72 @@
   left: 35%;
   border-radius: 10px;
   animation: individend 1s linear;
-}
-.register-header {
+} */
+/* .register-header {
   height: 50px;
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
-}
-.register-header h2 {
+} */
+/* .register-header h2 {
   text-align: center;
   color: rgb(88, 75, 57);
   padding-top: 10px;
-}
-.faArrowLeft {
+} */
+/* .faArrowLeft {
   font-size: large;
   color: blueviolet;
   margin: 15px 10px;
-}
-.left-arrow {
+} */
+/* .left-arrow {
   background: none;
   border: none;
   float: left;
-}
-button:hover {
+} */
+/* button:hover {
   cursor: pointer;
-}
+} */
 
-.form-container {
+/* .form-container {
   width: 100%;
   height: 92%;
   background-color: rgb(171, 123, 123);
   position: absolute;
   border-radius: 0 0 10px 10px;
-}
+} */
 form{
-  margin: 10% 0 10% 25%;
+  margin: 5% 0 10% 20%;
 }
-#firstName, #lastName, #email, #password, #confirmPassword, #mobile{
+/* #firstName, #lastName, #email, #password, #confirmPassword, #mobile{
   width: 60%;
   height: 4vh;
   border-radius: 5px;
   border: none;
-}
-#dob{
+} */
+/* #dob{
   width: 60%;
   height: 4vh;
   border-radius: 5px;
   border: none;
-}
-input:focus:not(input[type="radio"]){
+} */
+/* input:focus:not(input[type="radio"]){
   outline: 2px solid blueviolet;
-}
-#sign-up{
-  width: auto;
+} */
+/* #sign-up{
+  width: 20%;
   height: 4vh;
   background-color: rgb(40, 135, 40);
   color: white;
   border-radius: 5px;
   border: none;
-  margin: 2% 20%;
-  padding: 5px;
-}
-p{
-  color: blue;
-}
-#log-in{
-  width: auto;
-  height: 3vh;
+  margin: 2% 30%;
+} */
+/* #log-in{
+  width: 20%;
+  height: 4vh;
   background-color: rgb(53, 70, 53);
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 5px;
-}
+} */
 
 /* animation */
 @keyframes dividend {
