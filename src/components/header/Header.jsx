@@ -104,7 +104,7 @@ export default function Header() {
       <header className="sticky top-0 z-3">
         <div className="header xl:w-[100%] xl:h-auto lg:w-[100%] lg:h-auto md:w-[100%] md:h-auto sm:w-[100%] sm:h-auto max-sm:w-[100%] max-sm:h-auto bg-white shadow-[1px_2px_5px_0px_rgba(0,0,0,0.75)] animate-[background_2s_forwards_linear]">
           <div className="flex items-center justify-center border-b-[rgba(0,128,0,0.388)] border-b-[1px]">
-            <div className="logo-input xl:w-[60%] xl:h-auto lg:w-[60%] lg:h-auto md:w-[60%] md:h-auto sm:w-[60%] sm:h-auto max-sm:w-[100%] max-sm:h-auto flex items-center">
+            <div className="logo-input xl:w-[60%] xl:h-auto lg:w-[60%] lg:h-auto md:w-[60%] md:h-auto sm:w-[60%] sm:h-auto max-sm:w-[100%] max-sm:h-[8vh] flex items-center">
               <img
                 src="https://images.mamaearth.in/wysiwyg/mamaearth-logo.png?auto=format&fit=scale"
                 alt="logo"
@@ -127,7 +127,7 @@ export default function Header() {
               <img
                 src="https://images.mamaearth.in/vip-desktop-join.gif"
                 alt=""
-                className="xl:w-[35%] xl:h-[8vh] lg:w-[35%] lg:h-[8vh] md:w-[35%] md:h-[8vh] sm:w-[35%] sm:h-[8vh] max-sm:w-[35%] max-sm:h-[8vh] cursor-pointer"
+                className="xl:w-[35%] xl:h-[8vh] lg:w-[35%] lg:h-[8vh] md:w-[35%] md:h-[8vh] sm:w-[35%] sm:h-[8vh] max-sm:w-[35%] max-sm:h-[8vh] max-sm:hidden cursor-pointer"
               />
               <button
                 className="bg-none border-none text-blue-600 max-sm:text-[12px] cursor-pointer"
