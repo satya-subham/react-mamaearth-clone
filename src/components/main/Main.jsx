@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +16,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Main({ interval = 3000 }) {
+  // GSAP ANIMATION yet to be used
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState([]);
@@ -200,10 +204,6 @@ export default function Main({ interval = 3000 }) {
                 use and we're PETA Certified - which means we never test on
                 animals. This is our #GoodnessInside.
               </p>
-              <div>
-                <button>SHOP NOW</button>
-                <button>OUR PLEDGES</button>
-              </div>
             </div>
           </div>
         </section>

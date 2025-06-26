@@ -114,7 +114,7 @@ export default function Footer() {
 
                 <div className="end">
                     <h3 className="last-line">
-                        <span className="c">ⓒ</span> 2023 Satyasubham@digikull . All Rights Reserved
+                        <span className="c">ⓒ</span> 2025 Satyasubham@The Skillians . All Rights Reserved
                     </h3>
                 </div>
 
