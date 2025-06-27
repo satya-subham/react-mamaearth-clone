@@ -155,7 +155,7 @@ export default function Header() {
             </div>
           </div>
           <nav>
-            <div className="nav xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] max-sm:w-[100%]">
+            <div className="nav xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] max-sm:w-[100%] max-[460px]:hidden">
               <ul>
                 {links.map((link, index) => (
                   <NavLink

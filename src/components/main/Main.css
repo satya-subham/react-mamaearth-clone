@@ -279,3 +279,9 @@ main {
     font-weight: bold;
   }
 }
+@media (max-width: 410px) {
+  .text p {
+    font-size: x-small;
+    text-wrap: wrap;
+  }
+}
