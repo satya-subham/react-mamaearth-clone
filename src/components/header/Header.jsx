@@ -151,7 +151,7 @@ export default function Header() {
                 {totalQuantity}
               </button>
               {name ? (
-                <button onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
+                <button className="text-blue-600" onMouseOver={onMouseEnter} onMouseOut={onMouseOut}>
                   <FontAwesomeIcon icon={faUser} />
                   {name}
                 </button>
