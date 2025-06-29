@@ -4,7 +4,7 @@
     background-color: rgb(244, 242, 238);
     cursor: pointer;
     border-top: 2px solid blueviolet;
-    position: fixed;
+    position: absolute;
     top: 40px;
     right: 10px;
     z-index: 3;
@@ -36,4 +36,22 @@
     border-radius: 5px;
     border: none;
     font-size: medium;
+}
+@media screen and (min-width: 720px) and (max-width: 920px) {
+    .mini-log-in-pop-up {
+        width: 17%;
+    }
+    
+}
+@media screen and (min-width: 426px) and (max-width: 719px) {
+    .mini-log-in-pop-up {
+        width: 30%;
+    }
+    
+}
+@media screen and (max-width: 425px) {
+    .mini-log-in-pop-up {
+        width: 40%;
+    }
+    
 }

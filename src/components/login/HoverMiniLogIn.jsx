@@ -59,25 +59,25 @@ export default function HoverMiniLogIn() {
       <div className="navlink-div">
         <NavLink to={"/profile"}>
           <FontAwesomeIcon icon={faUser} />
-          Your Profile
+          Profile
         </NavLink>
       </div>
       <div className="navlink-div">
         <NavLink>
           <FontAwesomeIcon icon={faCartArrowDown} />
-          Your Order
+          Order
         </NavLink>
       </div>
       <div className="navlink-div">
         <NavLink>
           <FontAwesomeIcon icon={faLocationDot} />
-          Your Order
+          Location
         </NavLink>
       </div>
       <div className="navlink-div">
         <NavLink>
           <FontAwesomeIcon icon={faPhone} />
-          Your Order
+          Number
         </NavLink>
       </div>
       {user ? (
