@@ -183,3 +183,8 @@
     padding-bottom: 5px;
   }
 }
+@media screen and (min-width: 460px){
+  .bar{
+    display: none;
+  }
+}

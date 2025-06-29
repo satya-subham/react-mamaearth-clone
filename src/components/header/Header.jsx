@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartArrowDown, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCartArrowDown, faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { MainContext } from "../../context/Context";
 import HoverMiniLogIn from "../login/HoverMiniLogIn";
@@ -19,6 +19,8 @@ export default function Header() {
     setSearch,
     user,
     setUser,
+    sideNav, 
+    setSideNav
   } = useContext(MainContext);
 
   const { totalQuantity, name, email } = useSelector((state) => state.cart);
@@ -103,8 +105,8 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-3">
         <div className="header xl:w-[100%] xl:h-auto lg:w-[100%] lg:h-auto md:w-[100%] md:h-auto sm:w-[100%] sm:h-auto max-sm:w-[100%] max-sm:h-auto bg-white shadow-[1px_2px_5px_0px_rgba(0,0,0,0.75)] animate-[background_2s_forwards_linear]">
-          <div className="flex items-center justify-center border-b-[rgba(0,128,0,0.388)] border-b-[1px]">
-            <div className="logo-input xl:w-[60%] xl:h-auto lg:w-[60%] lg:h-auto md:w-[60%] md:h-auto sm:w-[60%] sm:h-auto max-sm:w-[100%] max-sm:h-[8vh] flex items-center">
+          <div className="flex items-center justify-center border-b-[rgba(0,128,0,0.388)] border-b-[1px] max-[460px]:h-[40px]">
+            <div className="logo-input xl:w-[60%] xl:h-auto lg:w-[60%] lg:h-auto md:w-[60%] md:h-auto sm:w-[60%] sm:h-auto max-sm:w-[100%] max-sm:h-[8vh] flex items-center max-[460px]:hidden">
               <img
                 src="https://images.mamaearth.in/wysiwyg/mamaearth-logo.png?auto=format&fit=scale"
                 alt="logo"
@@ -123,6 +125,17 @@ export default function Header() {
                 Search
               </button>
             </div>
+
+
+            {/* BAR MENU */}
+            <div className="bar xl:hidden lg:hidden md:hidden sm:hidden max-[460px]:w-[50%] max-[460px]:h-[40px] flex items-center">
+              <button>
+                <FontAwesomeIcon icon={faBars} style={{color: "#B197FC",}} onClick={() => setSideNav(true)} />
+              </button>
+            </div>
+            
+
+
             <div className="flex items-center justify-around xl:w-[40%] xl:h-auto lg:w-[40%] lg:h-auto md:w-[40%] md:h-auto sm:w-[40%] sm:h-auto max-sm:w-[40%] max-sm:h-auto">
               <img
                 src="https://images.mamaearth.in/vip-desktop-join.gif"

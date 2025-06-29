@@ -14,6 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "./Main.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SideNav from "../sidenav/SideNav";
 
 export default function Main({ interval = 3000 }) {
   // GSAP ANIMATION yet to be used
@@ -34,6 +35,7 @@ export default function Main({ interval = 3000 }) {
     setIsRegister,
     search,
     setSearch,
+    sideNav, setSideNav
   } = useContext(MainContext);
 
   const images = [
@@ -127,6 +129,8 @@ export default function Main({ interval = 3000 }) {
     <>
       <main>
         <ToastContainer />
+
+        {sideNav && <SideNav />}
         {isCart ? <Cart /> : undefined}
 
         {isRegister ? <RegisterForm /> : undefined}

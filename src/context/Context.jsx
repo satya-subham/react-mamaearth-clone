@@ -9,6 +9,7 @@ function Context({ children }) {
   const [search, setSearch] = useState("");
   const [user, setUser] = useState();
   const [yes, setYes] = useState(false);
+  const [sideNav, setSideNav] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
 
   return (
@@ -27,7 +28,8 @@ function Context({ children }) {
         yes, 
         setYes,
         registerModal,
-        setRegisterModal
+        setRegisterModal,
+        sideNav, setSideNav
       }}
     >
       {children}
